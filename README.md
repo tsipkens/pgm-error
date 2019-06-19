@@ -8,7 +8,7 @@ by T. A. Sipkens and coworkers.
 
 ----------------------------------------------------------------------
 
-### Description and instructions:
+### Description and instructions
 
 This software is an implementation of the general error model
 described in the associated work, which simulates signals according
