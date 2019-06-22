@@ -1,4 +1,5 @@
 ## MATLAB tools for a general TiRe-LII error model
+#### (Wat-TiReLII-general-error-model)
 
 This constitutes a general error model software package distributed in
 association with work published in the Applied Optics entitled
@@ -6,7 +7,7 @@ association with work published in the Applied Optics entitled
 signals](https://www.osapublishing.org/ao/abstract.cfm?uri=ao-56-30-8436)*
 by T. A. Sipkens and coworkers.  
 
-- - - -
+----------------------------------------------------------------------
 
 ### Description and instructions
 
@@ -48,14 +49,14 @@ This software distribution includes the following files:
 
 README.md		This file.
 
-main_simulate_C.m Primary script which loads signals, calls
+main_simulate_C.m 	Primary script which loads signals, calls
 			function to simulate signals, and performs
 			fitting procedure on the data.
 
-simulate_noise.m Takes error model parameters and generates
+simulate_noise.m 	Takes error model parameters and generates
 			multiple realizations of signals
 
-J.mat A sample expected mean TiRe-LII signal
+J.mat 			A sample expected mean TiRe-LII signal
 			generated for C-N2 using the Michelsen
 			model in (Michelsen et al., Appl. Phys. B,
 			2007)
