@@ -47,16 +47,16 @@ tau, theta, and gamma in the `main_simulate_C.m` script.
 
 This software distribution includes the following files:
 
-README.md		This file.
+'README.md'		This file.
 
-main_simulate_C.m 	Primary script which loads signals, calls
+'main_simulate_C.m' 	Primary script which loads signals, calls
 			function to simulate signals, and performs
 			fitting procedure on the data.
 
-simulate_noise.m 	Takes error model parameters and generates
+'simulate_noise.m' 	Takes error model parameters and generates
 			multiple realizations of signals
 
-J.mat 			A sample expected mean TiRe-LII signal
+'J.mat'			A sample expected mean TiRe-LII signal
 			generated for C-N2 using the Michelsen
 			model in (Michelsen et al., Appl. Phys. B,
 			2007)
