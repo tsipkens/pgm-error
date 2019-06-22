@@ -6,7 +6,7 @@ association with work published in the Applied Optics entitled
 signals](https://www.osapublishing.org/ao/abstract.cfm?uri=ao-56-30-8436)*
 by T. A. Sipkens and coworkers.  
 
-----------------------------------------------------------------------
+- - - -
 
 ### Description and instructions
 
