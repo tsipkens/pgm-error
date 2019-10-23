@@ -1,5 +1,5 @@
 ## MATLAB tools for a general TiRe-LII error model
-#### (Wat-TiReLII-general-error-model)
+#### (wat-lii-error-model)
 
 This constitutes a general error model software package distributed in
 association with work published in the Applied Optics entitled
