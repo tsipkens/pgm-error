@@ -62,7 +62,7 @@ development.
 
 Users of this work should cite, 
 
-> [T. A. Sipkens, P. J. Hadwin, S. J. Grauer, and K. J. Daun, “General error model for analysis of laser-induced incandescence signals,” Applied Optics, 56(30), 8436-8445 (2017).][1], 
+> [T. A. Sipkens, P. J. Hadwin, S. J. Grauer, and K. J. Daun, “General error model for analysis of laser-induced incandescence signals,” Applied Optics, 56(30), 8436-8445 (2017)][1], 
 
 and can consider citing this repository, if this code is used directly. 
 
