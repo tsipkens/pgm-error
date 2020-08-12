@@ -7,8 +7,6 @@ association with work published in the Applied Optics entitled
 signals](https://www.osapublishing.org/ao/abstract.cfm?uri=ao-56-30-8436)*
 by T. A. Sipkens and coworkers.  
 
-----------------------------------------------------------------------
-
 ### Description and instructions
 
 This software is an implementation of the general error model
@@ -37,26 +35,20 @@ tau, theta, and gamma in the `main_simulate_C.m` script.
 
 ----------------------------------------------------------------------
 
-#### Size
-
-9.98 KB
-
-----------------------------------------------------------------------
-
 #### Components
 
 This software distribution includes the following files:
 
-`README.md`		This file.
+* README.md* -		This file.
 
-`main_simulate_C.m` 	Primary script which loads signals, calls
+*main_simulate_C.m* - 	Primary script which loads signals, calls
 			function to simulate signals, and performs
 			fitting procedure on the data.
 
-`simulate_noise.m` 	Takes error model parameters and generates
+*simulate_noise.m* -  	Takes error model parameters and generates
 			multiple realizations of signals
 
-`J.mat`			A sample expected mean TiRe-LII signal
+*J.mat* - 		A sample expected mean TiRe-LII signal
 			generated for C-N2 using the Michelsen
 			model in (Michelsen et al., Appl. Phys. B,
 			2007)
@@ -70,3 +62,7 @@ emailed at [tsipkens@uwaterloo.ca](mailto:tsipkens@uwaterloo.ca).
 Alternatively, one can contact Kyle J. Daun at
 [kjdaun@uwaterloo.ca](mailto:kjdaun@uwaterloo.ca) who supported code
 development.
+
+#### Size
+
+9.98 KB
