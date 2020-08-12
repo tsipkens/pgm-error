@@ -32,8 +32,6 @@ model fit to the data.
 Error model parameters can be modified by editing the assignment of
 tau, theta, and gamma in the `main_simulate_C.m` script.
 
-----------------------------------------------------------------------
-
 #### Components
 
 This software distribution includes the following files:
