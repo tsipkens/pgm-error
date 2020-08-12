@@ -38,7 +38,7 @@ tau, theta, and gamma in the `main_simulate_C.m` script.
 
 This software distribution includes the following files:
 
-* README.md* -		This file.
+*README.md* -		This file.
 
 *main_simulate_C.m* - 	Primary script which loads signals, calls
 			function to simulate signals, and performs
