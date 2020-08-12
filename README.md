@@ -1,9 +1,12 @@
-## MATLAB tools for a general TiRe-LII error model
+## MATLAB tools for a general optical signal error model
 
 This constitutes a software package distributed in
 association with [Sipkens et al. (2017)][1], which evaluates
 a general error model for time-resolved laser-induced
-incandescence (TiRe-LII) signals.  
+incandescence (TiRe-LII) signals (though the results are
+applicable to a larger range of optical signals, 
+and beyond). This code replaces an archived version available
+on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). 
 
 ### Description and instructions
 
