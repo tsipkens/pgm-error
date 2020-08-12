@@ -1,10 +1,9 @@
 ## MATLAB tools for a general TiRe-LII error model
 
-This constitutes a general error model software package distributed in
-association with work published in the Applied Optics entitled
-*[General error model for analysis of laser-induced incandescence
-signals](https://www.osapublishing.org/ao/abstract.cfm?uri=ao-56-30-8436)*
-by T. A. Sipkens and coworkers.  
+This constitutes a software package distributed in
+association with [Sipkens et al. (2017)][1], which evaluates
+a general error model for time-resolved laser-induced
+incandescence (TiRe-LII) signals.  
 
 ### Description and instructions
 
@@ -32,7 +31,7 @@ model fit to the data.
 Error model parameters can be modified by editing the assignment of
 tau, theta, and gamma in the `main_simulate_C.m` script.
 
-#### Components
+### Components
 
 This software distribution includes the following files:
 
@@ -45,14 +44,13 @@ This software distribution includes the following files:
 *simulate_noise.m* -  	Takes error model parameters and generates
 			multiple realizations of signals
 
-*J.mat* - 		A sample expected mean TiRe-LII signal
+*J.mat* - 		Matlab data for a sample expected mean TiRe-LII signal
 			generated for C-N2 using the Michelsen
-			model in (Michelsen et al., Appl. Phys. B,
-			2007)
+			model from [Michelsen et al. (2007)][mich].
 
 ----------------------------------------------------------------------
 
-#### Contact information:
+#### Contact information
 
 The primary author of the code is Timothy A. Sipkens, who can be
 emailed at [tsipkens@uwaterloo.ca](mailto:tsipkens@uwaterloo.ca).
@@ -60,6 +58,21 @@ Alternatively, one can contact Kyle J. Daun at
 [kjdaun@uwaterloo.ca](mailto:kjdaun@uwaterloo.ca) who supported code
 development.
 
+#### How to cite
+
+Users of this work should cite, 
+
+[T. A. Sipkens, P. J. Hadwin, S. J. Grauer, and K. J. Daun, “General error model for analysis of laser-induced incandescence signals,” Applied Optics, 56(30), 8436-8445 (2017).][1], 
+
+and can consider citing this repository, if this code is used directly. 
+
 #### Size
 
 9.98 KB
+
+
+
+[1]: https://www.osapublishing.org/ao/abstract.cfm?uri=ao-56-30-8436
+
+[mich]: https://link.springer.com/article/10.1007/s00340-007-2619-5
+
