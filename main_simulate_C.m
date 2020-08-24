@@ -13,7 +13,7 @@ clc;
 %  Contains incandescence (J), time vector (t), and wavelength (l) produced
 %  by evaluating the Michelsen model in (Michelsen et al., 
 %  Appl. Phys. B, 2007)
-load('J.mat'); 
+load('J.mat');
 
 
 % Define error model parameters
@@ -29,7 +29,7 @@ s_bar = J.*theta; % expected mean signal
     % generate observed signals, with error
     
 
-% Fit error model parameters
+% Fit error model parameters (and display output)
 [x_lsq,x_var] = polyfit(s_ave,s_std.^2,2); % fit quadratic to variance
 disp('Error model parameters: '); % display results
 disp(' ');
@@ -39,7 +39,8 @@ fprintf('LSQ     %4.3f   %4.3f    %4.3f \n',x_lsq(1),x_lsq(2),x_lsq(3));
 disp(' ');
 
 
-% Plotting capabilities
+
+%== FIG 1: A sample LII signal ===========================================%
 figure(1); % plot instances of the signals generated above
 [~,ll] = min(s_tilde(1,:)); % signal index to plot, use lowest instance
 plot(t,s_bar,'k'); % plots expected mean signal
@@ -57,6 +58,8 @@ ylim([-20,120]);
 legend('s_{bar}','s_{ave}','s_{tilde}','s');
 
 
+
+%== FIG 2: Plot of average signal versus variance ========================%
 figure(2); % plot average of observed signals verses variance and fits
 plot(s_ave,s_std.^2,'.'); % plot observed average verses variance
 hold on;
