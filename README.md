@@ -2,10 +2,14 @@
 
 This constitutes a software package distributed in
 association with [Sipkens et al. (2017)][1], which evaluates
-a general error model for time-resolved laser-induced
-incandescence (TiRe-LII) signals (though the results are
-applicable to a larger range of optical signals, 
-and beyond). This code replaces an archived version available
+a general error model for optical signals, including Poisson-Gaussian
+noise and changes in the measurement condtitions between repeat 
+(e.g. between laser shots). Particular focus is placed on 
+time-resolved laser-induced (TiRe-LII) and the shot-to-shot variations 
+in quantities like the laser energy and particule volume fraction in 
+the probe volume. 
+
+This code replaces an archived version available
 on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). 
 
 ### Description and instructions
@@ -68,10 +72,6 @@ Users of this work should cite,
 > [T. A. Sipkens, P. J. Hadwin, S. J. Grauer, and K. J. Daun, “General error model for analysis of laser-induced incandescence signals,” Applied Optics, 56(30), 8436-8445 (2017)][1], 
 
 and can consider citing this repository, if this code is used directly. 
-
-#### Size
-
-~ 10 KB
 
 
 
