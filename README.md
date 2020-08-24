@@ -4,7 +4,9 @@ This is a software package, originally distributed in association with [Sipkens 
 
 This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). This software package was developed for use with MATLAB 2016a running on Windows. 
 
-### Sample use
+### Sample use]
+
+#### Simulated signals
 
 The simplest demonstration of this program starts with a theoretical, noiseless signal, considered here with respect to TiRe-LII signals. For simplicity, a sample set of data was included with this distribution for reference. It can be loaded using:
 
@@ -56,22 +58,37 @@ plot(t, s_tilde(:,5), 'b'); % plot noiseless signal after shot-to-shot
 hold off;
 ```
 
-### Components
+#### Experimental signals
 
-This software distribution includes the following files:
+One can also analyze experimental signals. We will here demonstrate on noisy signals generated from the above procedure, but a simple substitution for experimental signals has been demonstrated by [Sipkens et al. (2017)][1]. Analysis proceeds simply by fitting a polynomial to the mean and variance of the data. That is, compute the mean and standard deviation of the signals, `s`, generated above: 
 
-*README.md* -		This file.
+```Matlab
+s_ave = mean(s, 2);
+s_std = std(s, [], 2);
+```
 
-*main_simulate_C.m* - 	Primary script which loads signals, calls
-			function to simulate signals, and performs
-			fitting procedure on the data.
+Alternatively, these quantities are output directly from the `simulate_noise()` function, as shown above. Now, fit a quadratic polynomial to the data: 
 
-*simulate_noise.m* -  	Takes error model parameters and generates
-			multiple realizations of signals
+```Matlab
+[x_lsq,x_var] = polyfit(s_ave,s_std.^2,2); % fit quadratic to variance
+```
 
-*J.mat* - 		Matlab data for a sample expected mean TiRe-LII signal
-			generated for C-N2 using the Michelsen
-			model from [Michelsen et al. (2007)][mich].
+Here, `x_lsq(1)` will correspond to an estimate of `tau^2` or the variance of the shot-to-shot variations; `x_lsq(2)` to `theta` (i.e., the scaling and the Poisson contributions); and `x_lsq(3)` to `gamma^2` or the underlying Gaussian noise level. The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data: 
+
+```Matlab
+figure(2); % plot average of observed signals verses variance and fits
+plot(s_ave,s_std.^2,'.'); % plot observed average verses variance
+hold on;
+max_plot = theta*max(J); % maximum of x-axis in plots
+
+% plot quadratic error model fit to variance
+fplot(@(x) x_lsq(3) + x_lsq(2).*x + x_lsq(1).*(x.^2), ...
+    '--k', [0,max_plot]);
+    
+hold off;
+```
+
+[Sipkens et al. (2017)][1] demonstrated that a variety of TiRe-LII signals will show this quadratic relationship. 
 
 ### A sample script: main_simulate_C.m
 
@@ -88,6 +105,25 @@ model fit to the data.
 
 Error model parameters can be modified by editing the assignment of
 tau, theta, and gamma in the `main_simulate_C.m` script.
+
+----------------
+
+### Components
+
+This software distribution includes the following files:
+
+*README.md* -		This file.
+
+*main_simulate_C.m* - 	Primary script which loads signals, calls
+			function to simulate signals, and performs
+			fitting procedure on the data.
+
+*simulate_noise.m* -  	Takes error model parameters and generates
+			multiple realizations of signals
+
+*J.mat* - 		Matlab data for a sample expected mean TiRe-LII signal
+			generated for C-N2 using the Michelsen
+			model from [Michelsen et al. (2007)][mich].
 
 ----------------------------------------------------------------------
 
@@ -118,7 +154,3 @@ and can consider citing this repository, if this code is used directly.
 
 [2]: https://link.springer.com/article/10.1007/s00340-007-2619-5
 
-
-```
-
-```

@@ -34,8 +34,8 @@ s_bar = J.*theta; % expected mean signal
 disp('Error model parameters: '); % display results
 disp(' ');
 fprintf('        tau^2   theta   gamma^2 \n')
-fprintf('True    %4.3f   %4.3f    %4.3f \n',tau^2,theta,gamma^3)
-fprintf('LSQ     %4.3f   %4.3f    %4.3f \n',x_lsq(1),x_lsq(2),x_lsq(3));
+fprintf('True    %4.3f   %4.3f    %4.3f \n',tau^2, theta, gamma^2)
+fprintf('LSQ     %4.3f   %4.3f    %4.3f \n',x_lsq(1), x_lsq(2), x_lsq(3));
 disp(' ');
 
 
@@ -64,13 +64,23 @@ figure(2); % plot average of observed signals verses variance and fits
 plot(s_ave,s_std.^2,'.'); % plot observed average verses variance
 hold on;
 max_plot = theta*max(J); % maximum of x-axis in plots
-fplot(@(x) gamma^2+theta.*x+(tau^2).*(x.^2),'-k',[0,max_plot]);
-    % plot quadratic error model fit to variance
-fplot(@(x) gamma^2+theta.*x,'--k',[0,max_plot]);
-    % plot only Poisson-Gaussian component of the error model fit
+
+% plot quadratic error model fit to variance
+fplot(@(x) x_lsq(3) + x_lsq(2).*x + x_lsq(1).*(x.^2), ...
+    '--k', [0,max_plot]);
+
+% plot original model parameters
+fplot(@(x) gamma^2 + theta.*x + (tau^2).*(x.^2), ...
+    '-k', [0,max_plot]);
+
+% plot only Poisson-Gaussian component of the error model
+fplot(@(x) gamma^2 + theta.*x, ...
+    '--k', [0,max_plot]);
 hold off;
+
 xlim([0,max_plot]);
 xlabel('<s> [a.u.]');
 ylabel('var(s) [a.u.]');
-legend('Observed','General error model','Poisson-Gaussian component',...
-    'location','northwest');
+legend('Observed', 'Fit error model', ...
+    'General error model', 'Poisson-Gaussian component', ...
+    'location', 'northwest');
