@@ -4,7 +4,7 @@ This is a software package, originally distributed in association with [Sipkens 
 
 This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). This software package was developed for use with MATLAB 2016a running on Windows. 
 
-### Use
+### Sample use
 
 The simplest demonstration of this program starts with a theoretical, noiseless signal, considered here with respect to TiRe-LII signals. For simplicity, a sample set of data was included with this distribution for reference. It can be loaded using:
 
@@ -73,7 +73,7 @@ This software distribution includes the following files:
 			generated for C-N2 using the Michelsen
 			model from [Michelsen et al. (2007)][mich].
 
-### The sample script
+### A sample script: main_simulate_C.m
 
 Users can execute the main script immediately, provided all attached files are located in the same directory and that directory is included in the MATLAB path. One must then enter `main_simulate_C` in the MATLAB command line. This code will generate Figure 1 from [Sipkens et al. (2017)][1]. 
 
