@@ -4,7 +4,7 @@ This is a software package, originally distributed in association with [Sipkens 
 
 This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). This software package was developed for use with MATLAB 2016a running on Windows. 
 
-### Sample use]
+### Sample use
 
 #### Simulated signals
 
