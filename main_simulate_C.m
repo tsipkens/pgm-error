@@ -10,10 +10,12 @@ clc;
 
 
 % Load simulated carbon incandescence trace.
-%  Contains incandescence (J), time vector (t), and wavelength (l) produced
-%  by evaluating the Michelsen model in (Michelsen et al., 
+%  Contains time (t) and incandescence (J) produced by 
+%  evaluating the Michelsen model in (Michelsen et al., 
 %  Appl. Phys. B, 2007)
-load('J.mat');
+data = csvread('lii_data.csv', 4, 0);
+t = data(:, 1); % time
+J = data(:, 2); % incandescence
 
 
 % Define error model parameters
@@ -25,7 +27,7 @@ gamma = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
 % Generate a set of signals with error
 nn = 500; % number of shots to simulate
 s_bar = J.*theta; % expected mean signal
-[s,s_ave,s_std,s_tilde] = simulate_noise(s_bar,tau,theta,gamma,nn);
+[s,s_ave,s_std,s_tilde] = add_noise(s_bar,tau,theta,gamma,nn);
     % generate observed signals, with error
     
 
