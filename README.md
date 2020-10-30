@@ -11,7 +11,9 @@ This code replaces an archived version available on [figshare](https://figshare.
 The simplest demonstration of this program starts with a theoretical, noiseless signal, considered here with respect to TiRe-LII signals. For simplicity, a sample set of data was included with this distribution for reference. It can be loaded using:
 
 ```Matlab
-load('J.mat');
+data = csvread('lii_data.csv');
+t = data(:, 1); % time
+J = data(:, 2); % incandescence
 ```
 
 This will load three variables into the workspace: (1) `lambda` contains the wavelength for the loaded signal; (2) `t` contains a vector of sample times for the signal; and, most importantly, (3) `J` contains an incandescence trace, evaluated using the Michelsen model from [Michelsen et al. (2007)][2]. Next, define the relevant error model parameters: 
@@ -19,18 +21,19 @@ This will load three variables into the workspace: (1) `lambda` contains the wav
 ```Matlab
 % Define error model parameters
 tau = 0.2; % shot-to-shot variation as a dimensionless std. dev.
-theta = 1; % amplification / scaling factor
-gamma = sqrt(2); % Gaussian noise level
+the = 1; % amplification / scaling factor
+gam = sqrt(2); % Gaussian noise level
                  % in percent of max, i.e. 15 = 15%
 ```
 
 The parameters are generally described in [Sipkens et al. (2017)][1]. Briefly, `tau` controls the amount of variation between observations (e.g., between shots), `theta` controls the level of Poisson noise (indirectly, by accounting for scaing of the signal), and `gamma` controls the cosntant Gaussian component of the background. Now, simulate 500 laser shots: 
 
 ```Matlab
-nn = 500; % number of shots to simulate
-s_bar = J.*theta; % expected mean signal
-[s,s_ave,s_std,s_tilde] = ...
-   simulate_noise(s_bar,tau,theta,gamma,nn);
+n_shots = 500; % number of shots to simulate
+s_bar = J .* the; % expected mean signal
+[s, s_ave, s_std, s_tilde] = ...
+    add_noise(s_bar, tau, the, gam, n_shots);
+    % generate observed signals, with error
 ```
 
 The second line creates a signal by scaling by the incandescence by the `theta` factor above (necessary as the signal and incandescence are given in different units, requiring a conversion). The third line here is the primary call in this program, taking the generated, noiseless signal and creating 500 noisy signals (including shot-to-shot variations as specified by `tau`). 
@@ -70,16 +73,16 @@ s_std = std(s, [], 2);
 Alternatively, these quantities are output directly from the `simulate_noise()` function, as shown above. Now, fit a quadratic polynomial to the data: 
 
 ```Matlab
-[x_lsq,x_var] = polyfit(s_ave,s_std.^2,2); % fit quadratic to variance
+[x_lsq,x_var] = polyfit(s_ave, s_std.^2, 2); % fit quadratic to variance
 ```
 
 Here, `x_lsq(1)` will correspond to an estimate of `tau^2` or the variance of the shot-to-shot variations; `x_lsq(2)` to `theta` (i.e., the scaling and the Poisson contributions); and `x_lsq(3)` to `gamma^2` or the underlying Gaussian noise level. The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data: 
 
 ```Matlab
 figure(2); % plot average of observed signals verses variance and fits
-plot(s_ave,s_std.^2,'.'); % plot observed average verses variance
+plot(s_ave, s_std.^2, '.'); % plot observed average verses variance
 hold on;
-max_plot = theta*max(J); % maximum of x-axis in plots
+max_plot = the * max(J); % maximum of x-axis in plots
 
 % plot quadratic error model fit to variance
 fplot(@(x) x_lsq(3) + x_lsq(2).*x + x_lsq(1).*(x.^2), ...
@@ -90,21 +93,13 @@ hold off;
 
 [Sipkens et al. (2017)][1] demonstrated that a variety of TiRe-LII signals will show this quadratic relationship. 
 
-### A sample script: main_simulate_C.m
+### A sample script: main.m
 
-Users can execute the main script immediately, provided all attached files are located in the same directory and that directory is included in the MATLAB path. One must then enter `main_simulate_C` in the MATLAB command line. This code will generate Figure 1 from [Sipkens et al. (2017)][1]. 
+Users can execute the main script immediately, provided all attached files are located in the same directory and that directory is included in the MATLAB path. One must then enter `main` in the MATLAB command line. This code will generate Figure 1 from [Sipkens et al. (2017)][1]. 
 
-The code will display the source error model parameters chosen to
-generate the data, as well as parameters fit to the signals generated
-using the given error model. The code will also output two figures:
-(i) a plot showing a sample signal, expected mean signal, and
-single-shot expected signal with time (corresponding to Figure 1 in
-the associated paper) and (ii) a plot show the average verses the
-variance of the associated signals and the corresponding error
-model fit to the data.
+The code will display the source error model parameters chosen to generate the data, as well as parameters fit to the signals generated using the given error model. The code will also output two figures: (i) a plot showing a sample signal, expected mean signal, and single-shot expected signal with time (corresponding to Figure 1 in the associated paper) and (ii) a plot show the average verses the variance of the associated signals and the corresponding error model fit to the data.
 
-Error model parameters can be modified by editing the assignment of
-tau, theta, and gamma in the `main_simulate_C.m` script.
+Error model parameters can be modified by editing the assignment of tau, theta, and gamma in the `main.m` script.
 
 ----------------
 

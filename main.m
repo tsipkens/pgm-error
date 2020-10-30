@@ -12,71 +12,72 @@ clc;
 % Load simulated carbon incandescence trace.
 %  Contains time (t) and incandescence (J) produced by 
 %  evaluating the Michelsen model in (Michelsen et al., 
-%  Appl. Phys. B, 2007)
-data = csvread('lii_data.csv', 4, 0);
+%  Appl. Phys. B, 2007) at a wavelength of 500 nm. 
+data = csvread('lii_data.csv', 1, 0);
 t = data(:, 1); % time
 J = data(:, 2); % incandescence
 
 
 % Define error model parameters
 tau = 0.2; % shot-to-shot variation as a dimensionless std. dev.
-theta = 1; % amplification / scaling factor
-gamma = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
+the = 1; % amplification / scaling factor
+gam = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
 
 
 % Generate a set of signals with error
-nn = 500; % number of shots to simulate
-s_bar = J.*theta; % expected mean signal
-[s,s_ave,s_std,s_tilde] = add_noise(s_bar,tau,theta,gamma,nn);
+n_shots = 500; % number of shots to simulate
+s_bar = J .* the; % expected mean signal
+[s, ~, out] = ...
+    add_noise(s_bar, tau, the, gam, n_shots);
     % generate observed signals, with error
     
 
 % Fit error model parameters (and display output)
-[x_lsq,x_var] = polyfit(s_ave,s_std.^2,2); % fit quadratic to variance
+[tau_e, the_e, gam_e, x_var] = get_noise(s); % fit quadratic to variance
 disp('Error model parameters: '); % display results
 disp(' ');
-fprintf('        tau^2   theta   gamma^2 \n')
-fprintf('True    %4.3f   %4.3f    %4.3f \n',tau^2, theta, gamma^2)
-fprintf('LSQ     %4.3f   %4.3f    %4.3f \n',x_lsq(1), x_lsq(2), x_lsq(3));
+fprintf('        tau     theta   gamma   \n')
+fprintf('True    %4.3f   %4.3f    %4.3f \n', tau, the, gam)
+fprintf('LSQ     %4.3f   %4.3f    %4.3f \n', tau_e, the_e, gam_e);
 disp(' ');
 
 
 
 %== FIG 1: A sample LII signal ===========================================%
 figure(1); % plot instances of the signals generated above
-[~,ll] = min(s_tilde(1,:)); % signal index to plot, use lowest instance
-plot(t,s_bar,'k'); % plots expected mean signal
+[~,ll] = min(out.s_tilde(1,:)); % signal index to plot, use lowest instance
+plot(t, s_bar, 'k'); % plots expected mean signal
 hold on;
-plot(t,s_ave,'.','Color',[0.267,0.005,0.329]);
+plot(t, out.s_ave, '.', 'Color', [0.267,0.005,0.329]);
     % plots average of observed signals
-plot(t,s_tilde(:,ll),'--','Color',[0.267,0.6836,0.1328]);
+plot(t, out.s_tilde(:,ll), '--', 'Color', [0.267,0.6836,0.1328]);
     % plot a set of expected single-shot signals
-plot(t,s(:,ll),'.','Color',[0.4531,0.6836,0.1328]);
+plot(t, s(:,ll), '.', 'Color', [0.4531,0.6836,0.1328]);
     % plots a set of realized signals
 hold off;
 xlabel('t [ns]');
 ylabel('s, s_{bar}, s_{tilde}, s_{ave}');
 ylim([-20,120]);
-legend('s_{bar}','s_{ave}','s_{tilde}','s');
+legend('s_{bar}', 's_{ave}', 's_{tilde}', 's');
 
 
 
 %== FIG 2: Plot of average signal versus variance ========================%
 figure(2); % plot average of observed signals verses variance and fits
-plot(s_ave,s_std.^2,'.'); % plot observed average verses variance
+plot(mean(s,2), std(s,[],2).^2, '.'); % plot observed average verses variance
 hold on;
-max_plot = theta*max(J); % maximum of x-axis in plots
+max_plot = the * max(J); % maximum of x-axis in plots
 
 % plot quadratic error model fit to variance
-fplot(@(x) x_lsq(3) + x_lsq(2).*x + x_lsq(1).*(x.^2), ...
+fplot(@(x) gam_e^2 + the_e.*x + (tau_e^2).*(x.^2), ...
     '--k', [0,max_plot]);
 
 % plot original model parameters
-fplot(@(x) gamma^2 + theta.*x + (tau^2).*(x.^2), ...
+fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
     '-k', [0,max_plot]);
 
 % plot only Poisson-Gaussian component of the error model
-fplot(@(x) gamma^2 + theta.*x, ...
+fplot(@(x) gam^2 + the.*x, ...
     '--k', [0,max_plot]);
 hold off;
 
