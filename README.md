@@ -14,7 +14,7 @@ The simplest demonstration of this program starts with a theoretical, noiseless 
 load('J.mat');
 ```
 
-This will load three variables into the workspace: (*1*) `lambda` contains the wavelength for the loaded signal; (*2*) `t` contains a vector of sample times for the signal; and, most importantly, (*3*) `J` contains an incandescence trace, evaluated using the Michelsen model from [Michelsen et al. (2007)][2]. Next, define the relevant error model parameters: 
+This will load three variables into the workspace: (1) `lambda` contains the wavelength for the loaded signal; (2) `t` contains a vector of sample times for the signal; and, most importantly, (3) `J` contains an incandescence trace, evaluated using the Michelsen model from [Michelsen et al. (2007)][2]. Next, define the relevant error model parameters: 
 
 ```Matlab
 % Define error model parameters
