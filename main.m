@@ -27,8 +27,7 @@ gam = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
 % Generate a set of signals with error
 n_shots = 500; % number of shots to simulate
 s_bar = J .* the; % expected mean signal
-[s, ~, out] = ...
-    add_noise(s_bar, tau, the, gam, n_shots);
+[s, ~, out] = add_noise(s_bar, tau, the, gam, n_shots);
     % generate observed signals, with error
     
 

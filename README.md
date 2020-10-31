@@ -11,7 +11,7 @@ This code replaces an archived version available on [figshare](https://figshare.
 The simplest demonstration of this program starts with a theoretical, noiseless signal, considered here with respect to TiRe-LII signals. For simplicity, a sample set of data was included with this distribution for reference. It can be loaded using:
 
 ```Matlab
-data = csvread('lii_data.csv');
+data = csvread('data_lii.csv');
 t = data(:, 1); % time
 J = data(:, 2); % incandescence
 ```
@@ -26,17 +26,16 @@ gam = sqrt(2); % Gaussian noise level
                  % in percent of max, i.e. 15 = 15%
 ```
 
-The parameters are generally described in [Sipkens et al. (2017)][1]. Briefly, `tau` controls the amount of variation between observations (e.g., between shots), `theta` controls the level of Poisson noise (indirectly, by accounting for scaing of the signal), and `gamma` controls the cosntant Gaussian component of the background. Now, simulate 500 laser shots: 
+The parameters are generally described in [Sipkens et al. (2017)][1]. Briefly, `tau` controls the amount of variation between observations (e.g., between shots), `the` controls the level of Poisson noise (indirectly, by accounting for scaling of the signal), and `gam` controls the cosntant Gaussian component of the background. Now, simulate 500 laser shots: 
 
 ```Matlab
-n_shots = 500; % number of shots to simulate
-s_bar = J .* the; % expected mean signal
-[s, s_ave, s_std, s_tilde] = ...
-    add_noise(s_bar, tau, the, gam, n_shots);
+N_shots = 500; % number of shots to simulate
+[s_bar, ~, out] = J .* the; % expected mean signal
+s = add_noise(s_bar, tau, the, gam, N_shots);
     % generate observed signals, with error
 ```
 
-The second line creates a signal by scaling by the incandescence by the `theta` factor above (necessary as the signal and incandescence are given in different units, requiring a conversion). The third line here is the primary call in this program, taking the generated, noiseless signal and creating 500 noisy signals (including shot-to-shot variations as specified by `tau`). 
+The second line creates a signal by scaling by the incandescence by the `the` factor above (necessary as the signal and incandescence are given in different units, requiring a conversion). The third line here is the primary call in this program, taking the generated, noiseless signal and creating 500 noisy signals (including shot-to-shot variations as specified by `tau`). 
 
 Finally, let's visualize the results. First, plot the fifth realization of the noisy signal: 
 
@@ -57,7 +56,7 @@ Finally, add the noiseless version of the signal, after accounting for the shot-
 
 ```Matlab
 hold on;
-plot(t, s_tilde(:,5), 'b'); % plot noiseless signal after shot-to-shot
+plot(t, out.s_tilde(:,5), 'b'); % plot noiseless signal after shot-to-shot
 hold off;
 ```
 
@@ -70,22 +69,22 @@ s_ave = mean(s, 2);
 s_std = std(s, [], 2);
 ```
 
-Alternatively, these quantities are output directly from the `simulate_noise()` function, as shown above. Now, fit a quadratic polynomial to the data: 
+Alternatively, these quantities are output directly from the `add_noise()` function, as shown above. Now, fit a quadratic polynomial to the data using `get_noise()`: 
 
 ```Matlab
-[x_lsq,x_var] = polyfit(s_ave, s_std.^2, 2); % fit quadratic to variance
+[tau_e, the_e, gam_e, x_var] = get_noise(s);
 ```
 
-Here, `x_lsq(1)` will correspond to an estimate of `tau^2` or the variance of the shot-to-shot variations; `x_lsq(2)` to `theta` (i.e., the scaling and the Poisson contributions); and `x_lsq(3)` to `gamma^2` or the underlying Gaussian noise level. The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data: 
+The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data: 
 
 ```Matlab
 figure(2); % plot average of observed signals verses variance and fits
-plot(s_ave, s_std.^2, '.'); % plot observed average verses variance
+plot(out.s_ave, out.s_std.^2, '.'); % plot observed average verses variance
 hold on;
 max_plot = the * max(J); % maximum of x-axis in plots
 
 % plot quadratic error model fit to variance
-fplot(@(x) x_lsq(3) + x_lsq(2).*x + x_lsq(1).*(x.^2), ...
+fplot(@(x) tau_e^2 + the_e.*x + gam_e.*(x.^2), ...
     '--k', [0,max_plot]);
     
 hold off;
@@ -109,11 +108,11 @@ This software distribution includes the following files:
 
 *README.md* -		This file.
 
-*main_simulate_C.m* - 	Primary script which loads signals, calls
+*main.m* - 	Primary script which loads signals, calls
 			function to simulate signals, and performs
 			fitting procedure on the data.
 
-*simulate_noise.m* -  	Takes error model parameters and generates
+*add_noise.m* -  	Takes error model parameters and generates
 			multiple realizations of signals
 
 *J.mat* - 		Matlab data for a sample expected mean TiRe-LII signal
