@@ -104,20 +104,11 @@ Error model parameters can be modified by editing the assignment of tau, theta, 
 
 ### Components
 
-This software distribution includes the following files:
+Included data files are: 
 
-*README.md* -		This file.
+*lii.csv* - Data for a sample expected mean TiRe-LII signal generated for C-N2 using the Michelsen model from [Michelsen et al. (2007)][mich].
 
-*main.m* - 	Primary script which loads signals, calls
-			function to simulate signals, and performs
-			fitting procedure on the data.
-
-*add_noise.m* -  	Takes error model parameters and generates
-			multiple realizations of signals
-
-*J.mat* - 		Matlab data for a sample expected mean TiRe-LII signal
-			generated for C-N2 using the Michelsen
-			model from [Michelsen et al. (2007)][mich].
+*gaus.csv* - Data corresponding to a Gaussian distribution (used by default in the web app).
 
 ----------------------------------------------------------------------
 
