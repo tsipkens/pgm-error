@@ -13,7 +13,7 @@ clc;
 %  Contains time (t) and incandescence (J) produced by 
 %  evaluating the Michelsen model in (Michelsen et al., 
 %  Appl. Phys. B, 2007) at a wavelength of 500 nm. 
-data = csvread('data_lii.csv', 1, 0);
+data = csvread('data/lii.csv', 1, 0);
 t = data(:, 1); % time
 J = data(:, 2); % incandescence
 
@@ -25,9 +25,9 @@ gam = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
 
 
 % Generate a set of signals with error
-n_shots = 500; % number of shots to simulate
+N_shots = 500; % number of shots to simulate
 s_bar = J .* the; % expected mean signal
-[s, ~, out] = add_noise(s_bar, tau, the, gam, n_shots);
+[s, ~, out] = add_noise(s_bar, tau, the, gam, N_shots);
     % generate observed signals, with error
     
 
