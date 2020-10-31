@@ -1,6 +1,6 @@
 ## Tools for a general optical signal error model
 
-**For both Matlab and Javascript**
+***Matlab* + *Javascript* codes**
 
 This is a software package, originally distributed in association with [Sipkens et al. (2017)][1], which evaluates a general error model for optical signals, including Poisson-Gaussian noise and changes in the measurement condtitions between repeated observations (e.g. between laser shots). Particular focus is placed on time-resolved laser-induced (TiRe-LII) and the shot-to-shot variations in quantities like the laser energy and particle volume fraction in the probe volume.
 
