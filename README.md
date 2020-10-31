@@ -1,22 +1,20 @@
 ## Tools for a general optical signal error model
 
-**For both Matlab and Javascript**
+This is a software package, originally distributed in association with [Sipkens et al. (2017)][1], which evaluates a general error model for optical signals, including Poisson-Gaussian noise and changes in the measurement condtitions between repeated observations (e.g. between laser shots). Particular focus is placed on time-resolved laser-induced (TiRe-LII) and the shot-to-shot variations in quantities like the laser energy and particle volume fraction in the probe volume. This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). 
 
-This is a software package, originally distributed in association with [Sipkens et al. (2017)][1], which evaluates a general error model for optical signals, including Poisson-Gaussian noise and changes in the measurement condtitions between repeated observations (e.g. between laser shots). Particular focus is placed on time-resolved laser-induced (TiRe-LII) and the shot-to-shot variations in quantities like the laser energy and particle volume fraction in the probe volume.
+Two version of this code are available: 
 
-This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). The code includes both Matlab and Javascript versions of the model.
-The Matlab code was developed for use with MATLAB 2016a running on Windows and
-is demonstrated below. The Javascript code was used to build a web app, available
-[here](https://tsipkens.github.io/wat-lii-error/), with a screenshot preview
-immediately below.
+1. A Matlab version code is available in the upper repository. The Matlab code was developed for use with MATLAB 2016a running on Windows and is demonstrated below. Much of the remainder of this README pertains to this version of the code. 
 
-<p align="left">
-  <img width="580.5" height="506.25" src="docs/web_preview.png">
-</p>
+2. A Javascript version of the code is also available in the `js/` directory. The Javascript also uses d3.js to build a web app that demonstrates the error model, available [here](https://tsipkens.github.io/wat-lii-error/), with a screenshot preview immediately below. 
 
-### Demonstrating the Matlab code
+    <p align="left">
+      <img width="580.5" height="506.25" src="docs/web_preview.png">
+    </p>
 
-#### Simulated signals
+## Demonstrating the Matlab code
+
+### Simulated signals
 
 The simplest demonstration of this program starts with a theoretical, noiseless signal, considered here with respect to TiRe-LII signals. For simplicity, a sample set of data was included with this distribution for reference. It can be loaded using:
 
@@ -70,7 +68,7 @@ plot(t, out.s_tilde(:,5), 'b'); % plot noiseless signal after shot-to-shot
 hold off;
 ```
 
-#### Experimental signals
+### Experimental signals
 
 One can also analyze experimental signals. We will here demonstrate on noisy signals generated from the above procedure, but a simple substitution for experimental signals has been demonstrated by [Sipkens et al. (2017)][1]. Analysis proceeds simply by fitting a polynomial to the mean and variance of the data. That is, compute the mean and standard deviation of the signals, `s`, generated above:
 
@@ -110,7 +108,7 @@ The code will display the source error model parameters chosen to generate the d
 
 Error model parameters can be modified by editing the assignment of tau, theta, and gamma in the `main.m` script.
 
-### Data files
+## Data files
 
 Included data files correspond to:
 
@@ -120,7 +118,7 @@ Included data files correspond to:
 
 ----------------------------------------------------------------------
 
-#### Contact information
+### Contact information
 
 The primary author of the code is Timothy A. Sipkens, who can be
 emailed at [tsipkens@uwaterloo.ca](mailto:tsipkens@uwaterloo.ca).
@@ -128,7 +126,7 @@ Alternatively, one can contact Kyle J. Daun at
 [kjdaun@uwaterloo.ca](mailto:kjdaun@uwaterloo.ca) who supported code
 development.
 
-#### How to cite
+### How to cite
 
 Users of this work should cite,
 
