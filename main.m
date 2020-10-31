@@ -13,14 +13,14 @@ clc;
 %  Contains time (t) and incandescence (J) produced by 
 %  evaluating the Michelsen model in (Michelsen et al., 
 %  Appl. Phys. B, 2007) at a wavelength of 500 nm. 
-data = csvread('data/lii.csv', 1, 0);
+data = csvread('data/gaus.csv', 1, 0);
 t = data(:, 1); % time
 J = data(:, 2); % incandescence
 
 
 % Define error model parameters
 tau = 0.2; % shot-to-shot variation as a dimensionless std. dev.
-the = 1; % amplification / scaling factor
+the = 10; % amplification / scaling factor
 gam = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
 
 
