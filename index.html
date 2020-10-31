@@ -21,8 +21,8 @@
     <div id="navbar">
       <ul class="nav">
         <li><a href="#">
-          <b style="font-family:Montserrat;font-size:11pt;">GENERAL ERROR MODEL</b>
-        </a></li>
+            <b style="font-family:Montserrat;font-size:11pt;">GENERAL ERROR MODEL</b>
+          </a></li>
         <li><a href="#">Created by Timothy Sipkens</a></li>
       </ul>
     </div>
@@ -34,73 +34,92 @@
 
     <h2>General error model</h2>
 
-      <p align="justify">
-        This model generalizes the Poisson-Gaussian error model to allow
-        for fluctuations between measured signals, as described
-        by <a href="https://doi.org/10.1364/AO.56.008436">Sipkens et al</a>.
-        Overall, the model includes contributions from:
-      </p>
+    <p align="justify">
+      This model generalizes the Poisson-Gaussian error model to allow
+      for fluctuations between measured signals, as described
+      by <a href="https://doi.org/10.1364/AO.56.008436">Sipkens et al</a>.
+      Overall, the model includes contributions from three components.
+    </p>
 
-      <ol>
-        <li>shot or Poisson noise, incorporated by "scaling" the signal;</li>
-        <li>additive white, Gaussian noise; and</li>
-        <li>variations in a multiplier between measured signals
-          (or shot-to-shot variations).</li>
-      </ol>
+    <img src="docs/kinds_of_noise.png" alt="Noise types" class="center">
 
-      <p align="justify">
-        Yellow is a signal two standard deviations below normal,
-        dark purple is a signal two standard deviation below normal,
-        and red is a signal about the mean.
-        As a result, changing τ will stretch the bounds.
-      </p>
+    <p align="justify">
+      Additive white, <b>Gaussian noise</b> affects the signal more uniformly
+      and is the primary source of noise at lower signals.
+    </p>
 
-      <div class="control">
-        <b>Gaussian: </b>
-        <input type="range" name="gamSlider" id="gamSlider"
-          min="1" max="21" value= "7" style="height:6px;"
-          onchange="displayval(this.value, gam_vec, 'gamval');"> |
-        γ = <output id="gamval">-</output>
-      </div>
+    <p align="justify">
+      <b>Shot</b> or <b>Poisson noise</b>, which is incorporated by "reducing"
+      the signal by θ, will result in lower signals containing smaller
+      fluctuations. Reducing the Gaussian contributions, by lowering γ,
+      one can clearly see this effect.
+      This work approximates this type of noise
+      as Guassian. As a result, when θ is large (such that the
+      peak signal is below 50 counts), artifacts become visible in
+      the below model. Significant negative counts start to appear and
+      discretized values will not be visible as they would in true
+      Poisson-corrupted data.
+    </p>
 
-      <div class="control">
-        <b>Poisson: </b>
-        <input type="range" name="theSlider" id="theSlider"
-          min="1" max="19" value= "7" style="height:6px;"
-          onchange="displayval(this.value, the_vec, 'theval');"> |
-        θ = <output id="theval">-</output> |
-        max{s} = <output id="theval2">-</output> [100 × counts]
-      </div>
+    <p align="justify">
+      Finally, variations in a multiplier between measured signals
+      or <b>shot-to-shot variations</b> allow individual signals to
+      appear above or below the overall average. This is convolved
+      with Poisson noise, such that signals higher than the average
+      will contain more noise (this is vsisibly apparent for
+      <a href="#hlegend" id="set1">
+        γ = 0, θ = 0.4, and τ = 0.4</a>).
+    </p>
 
-      <div class="control">
-        <b>Shot-to-shot: </b>
-        <input type="range" name="tauSlider" id="tauSlider"
-          min="1" max="21" value= "11" style="height:6px;"
-          onchange="displayval(this.value, tau_vec, 'tauval');"> |
-        τ = <output id="tauval">-</output>
-      </div>
+    <h3 id="hlegend">Legend and viz controls</h3>
+
+    <p align="justify">
+      Yellow is a signal two standard deviations below the average,
+      dark purple is a signal two standard deviation above the average,
+      and red is a signal about the average.
+      As a result, changing τ will stretch the bounds.
+    </p>
+
+    <div class="control">
+      <b>Gaussian: </b>
+      <input type="range" name="gamSlider" id="gamSlider" min="1" max="21" value="7" style="height:6px;" onchange="displayval(this.value, gam_vec, 'gamval');"> |
+      γ = <output id="gamval">-</output>
+    </div>
+
+    <div class="control">
+      <b>Poisson: </b>
+      <input type="range" name="theSlider" id="theSlider" min="1" max="19" value="7" style="height:6px;" onchange="displayval(this.value, the_vec, 'theval');"> |
+      θ = <output id="theval">-</output> |
+      max{s} = <output id="theval2">-</output> [100 × counts]
+    </div>
+
+    <div class="control">
+      <b>Shot-to-shot: </b>
+      <input type="range" name="tauSlider" id="tauSlider" min="1" max="21" value="11" style="height:6px;" onchange="displayval(this.value, tau_vec, 'tauval');"> |
+      τ = <output id="tauval">-</output>
+    </div>
 
 
-      <!-- Create a div where the graph will take place -->
-      <div id="my_dataviz" style="padding-top:30px;"></div>
+    <!-- Create a div where the graph will take place -->
+    <div id="my_dataviz" style="padding-top:30px;"></div>
 
-      <hr>
+    <hr>
 
-      <p align="justify">
-        This web app supports an article in Applied Optics:
-      </p>
+    <p align="justify">
+      This web app supports an article in Applied Optics:
+    </p>
 
-      <p align="justify" style="padding-bottom:20px">
-        <a href="https://doi.org/10.1364/AO.56.008436">
-          Sipkens, T.A., Hadwin, P.J., Grauer, S.J. and Daun, K.J., 2017.
-          General error model for analysis of laser-induced incandescence signals.
-          <i>Applied optics</i>, 56(30), pp.8436-8445.
-        </a>
-      </p>
+    <p align="justify" style="padding-bottom:20px">
+      <a href="https://doi.org/10.1364/AO.56.008436">
+        Sipkens, T.A., Hadwin, P.J., Grauer, S.J. and Daun, K.J., 2017.
+        General error model for analysis of laser-induced incandescence signals.
+        <i>Applied optics</i>, 56(30), pp.8436-8445.
+      </a>
+    </p>
+
+    <script src="add_noise.js"></script>
 
   </div>
-
-  <script src="add_noise.js"></script>
 </body>
 
 </html>
