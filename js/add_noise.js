@@ -328,16 +328,20 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
 
   // function to set sliders to specific values
   function setvals (gamv, thev, tauv) {
-    d3.select("#gamSlider").attr('value', gamv)
-    d3.select("#theSlider").attr('value', thev)
-    d3.select("#tauSlider").attr('value', tauv)
-    console.log(thev)
-
     gam = gam_vec[gamv - 1]; the = the_vec[thev - 1]; tau = tau_vec[tauv - 1];
 
     document.getElementById('gamval').value = Math.round(gam * 100) / 100;
     document.getElementById('theval').value = Math.round(the * 100) / 100;
     document.getElementById('tauval').value = Math.round(tau * 100) / 100;
+    document.getElementById("theval2").value = J_peak(tau);
+
+    d3.select("#gamSlider")
+      .transition().attr("value", gamv)
+    d3.select("#theSlider")
+      .transition().attr("value", thev)
+    d3.select("#tauSlider")
+      .transition().attr("value", tauv)
+
     updatePlot()
   }
 
