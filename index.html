@@ -41,7 +41,7 @@
       Overall, the model includes contributions from three components.
     </p>
 
-    <img src="docs/kinds_of_noise.png" alt="Noise types" class="center">
+    <img src="docs/kinds_of_noise.png" alt="Noise types" class="center" style="max-width:95%;">
 
     <p align="justify">
       Additive white, <b>Gaussian noise</b> affects the signal more uniformly
@@ -55,8 +55,10 @@
       one can clearly see this effect.
       This work approximates this type of noise
       as Guassian. As a result, when θ is large (such that the
-      peak signal is below 50 counts), artifacts become visible in
-      the below model. Significant negative counts start to appear and
+      peak signal is below 50 counts, e.g., in the shoulder signal for this
+      <a href="#hlegend" id="set2">this set of parameters</a>),
+      artifacts become visible in this approximation.
+      Significant negative counts start to appear and
       discretized values will not be visible as they would in true
       Poisson-corrupted data.
     </p>
@@ -68,7 +70,7 @@
       with Poisson noise, such that signals higher than the average
       will contain more noise (this is vsisibly apparent for
       <a href="#hlegend" id="set1">
-        γ = 0, θ = 0.4, and τ = 0.4</a>).
+        this set of parameters</a>).
     </p>
 
     <h3 id="hlegend">Legend and viz controls</h3>

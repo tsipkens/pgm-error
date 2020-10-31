@@ -132,10 +132,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
   svg.append("text")
     .attr("text-anchor", "middle")
     .attr('transform', 'translate(-35,' + height / 2 + ')rotate(-90)')
-    .text("Signal, s / max{s}")
+    .text("Scaled signal, s/max{s}")
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr('transform', 'translate(' + (35 + width) + ',' + height / 2 + ')rotate(90)')
+    .attr('transform', 'translate(' + (40 + width) + ',' + height / 2 + ')rotate(-90)')
     .text("Signal, s [counts]")
 
   // Fill in the main plot ---------------------------------------------------//
@@ -318,8 +318,12 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
   //------------------------------------------------------------------------//
 
   // setpoint to show Poisson noise variations due to shot-to-shot
+  d3.select("#set2").on("click", function() {
+    setvals(1, 19, 8);
+  })
+
   d3.select("#set1").on("click", function() {
-    setvals(1, 9, 21);
+    setvals(1, 12, 21);
   })
 
   // function to set sliders to specific values
@@ -327,13 +331,13 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
     d3.select("#gamSlider").attr('value', gamv)
     d3.select("#theSlider").attr('value', thev)
     d3.select("#tauSlider").attr('value', tauv)
+    console.log(thev)
 
     gam = gam_vec[gamv - 1]; the = the_vec[thev - 1]; tau = tau_vec[tauv - 1];
 
     document.getElementById('gamval').value = Math.round(gam * 100) / 100;
     document.getElementById('theval').value = Math.round(the * 100) / 100;
     document.getElementById('tauval').value = Math.round(tau * 100) / 100;
-    console.log(tau)
     updatePlot()
   }
 
