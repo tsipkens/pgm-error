@@ -319,19 +319,28 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
 
   // setpoint to show Poisson noise variations due to shot-to-shot
   d3.select("#set1").on("click", function() {
-    d3.select("#gamSlider").attr('value', 1)
-    d3.select("#theSlider").attr('value', 9)
-    d3.select("#tauSlider").attr('value', 21)
-    document.getElementById('gamval').value = Math.round(gam_vec[1 - 1] * 100) / 100;
-    document.getElementById('theval').value = Math.round(the_vec[9 - 1] * 100) / 100;
-    document.getElementById('tauval').value = Math.round(tau_vec[21 - 1] * 100) / 100;
-    gam = 0; the = 0.4; tau = 0.4;
-    updatePlot()
+    setvals(1, 9, 21);
   })
+
+  // function to set sliders to specific values
+  function setvals (gamv, thev, tauv) {
+    d3.select("#gamSlider").attr('value', gamv)
+    d3.select("#theSlider").attr('value', thev)
+    d3.select("#tauSlider").attr('value', tauv)
+
+    gam = gam_vec[gamv - 1]; the = the_vec[thev - 1]; tau = tau_vec[tauv - 1];
+
+    document.getElementById('gamval').value = Math.round(gam * 100) / 100;
+    document.getElementById('theval').value = Math.round(the * 100) / 100;
+    document.getElementById('tauval').value = Math.round(tau * 100) / 100;
+    console.log(tau)
+    updatePlot()
+  }
+
 })
 
 
-function displayval(val, vec, id) {
+function displayval (val, vec, id) {
   document.getElementById(id).value = Math.round(vec[val - 1] * 100) / 100;
   if (id == "theval") {
     document.getElementById("theval2").value = J_peak(vec[val - 1]);
