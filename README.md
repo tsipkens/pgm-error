@@ -8,7 +8,9 @@ is demonstrated below. The Javascript code was used to build a web app, availabl
 [here](https://tsipkens.github.io/wat-lii-error/), with a screenshot preview
 immediately below.
 
-![web_preview](docs/web_preview.png)
+<p align="left">
+  <img width="387" height="337.5" src="docs/web_preview.png">
+</p>
 
 ### Demonstrating the Matlab code
 
