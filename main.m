@@ -13,7 +13,7 @@ clc;
 %  Contains time (t) and incandescence (J) produced by 
 %  evaluating the Michelsen model in (Michelsen et al., 
 %  Appl. Phys. B, 2007) at a wavelength of 500 nm. 
-data = csvread('lii_data.csv', 1, 0);
+data = csvread('data_lii.csv', 1, 0);
 t = data(:, 1); % time
 J = data(:, 2); % incandescence
 
