@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>General error model</title>
+
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="../add_noise.js"></script>
+
+  <!-- Load fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@300;400&family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="navbar-custom">
+    <div id="navbar">
+      <ul class="nav">
+        <li><a href="#">
+          <b style="font-family:Montserrat;font-size:11pt;">GENERAL ERROR MODEL</b>
+        </a></li>
+        <li><a href="#">Created by Timothy Sipkens</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <div class="main">
+
+    <h2>General error model</h2>
+
+      <p align="justify">
+        This model generalizes the Poisson-Gaussian error model to allow
+        for fluctuations between measured signals, as described
+        by <a href="https://doi.org/10.1364/AO.56.008436">Sipkens et al</a>.
+        Overall, the model includes contributions from:
+      </p>
+
+      <ol>
+        <li>shot or Poisson noise, incorporated by "scaling" the signal;</li>
+        <li>additive white, Gaussian noise; and</li>
+        <li>variations in a multiplier between measured signals
+          (or shot-to-shot variations).</li>
+      </ol>
+
+      <p align="justify">
+        Yellow is a signal two standard deviations below normal,
+        dark purple is a signal two standard deviation below normal,
+        and red is a signal about the mean.
+        As a result, changing τ will stretch the bounds.
+      </p>
+
+      <div class="control">
+        <b>Gaussian: </b>
+        <input type="range" name="gamSlider" id="gamSlider"
+          min="1" max="21" value= "7" style="height:6px;"
+          onchange="displayval(this.value, gam_vec, 'gamval');"> |
+        γ = <output id="gamval">-</output>
+      </div>
+
+      <div class="control">
+        <b>Poisson: </b>
+        <input type="range" name="theSlider" id="theSlider"
+          min="1" max="19" value= "7" style="height:6px;"
+          onchange="displayval(this.value, the_vec, 'theval');"> |
+        θ = <output id="theval">-</output> |
+        max{s} = <output id="theval2">-</output> [100 × counts]
+      </div>
+
+      <div class="control">
+        <b>Shot-to-shot: </b>
+        <input type="range" name="tauSlider" id="tauSlider"
+          min="1" max="21" value= "11" style="height:6px;"
+          onchange="displayval(this.value, tau_vec, 'tauval');"> |
+        τ = <output id="tauval">-</output>
+      </div>
+
+
+      <!-- Create a div where the graph will take place -->
+      <div id="my_dataviz" style="padding-top:30px;"></div>
+
+      <hr>
+
+      <p align="justify">
+        This article supports an article in Applied Optics:
+      </p>
+
+      <p align="justify" style="padding-bottom:20px">
+        <a href="https://doi.org/10.1364/AO.56.008436">
+          Sipkens, T.A., Hadwin, P.J., Grauer, S.J. and Daun, K.J., 2017.
+          General error model for analysis of laser-induced incandescence signals.
+          <i>Applied optics</i>, 56(30), pp.8436-8445.
+        </a>
+      </p>
+
+  </div>
+
+  <script src="plot_gaus.js"></script>
+</body>
+
+</html>
