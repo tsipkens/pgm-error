@@ -1,17 +1,17 @@
-## MATLAB tools for a general optical signal error model
+## Tools for a general optical signal error model
 
 This is a software package, originally distributed in association with [Sipkens et al. (2017)][1], which evaluates a general error model for optical signals, including Poisson-Gaussian noise and changes in the measurement condtitions between repeated observations (e.g. between laser shots). Particular focus is placed on time-resolved laser-induced (TiRe-LII) and the shot-to-shot variations in quantities like the laser energy and particle volume fraction in the probe volume. 
 
 This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). This software package was developed for use with MATLAB 2016a running on Windows. 
 
-### Sample use
+### Using the Matlab code
 
 #### Simulated signals
 
 The simplest demonstration of this program starts with a theoretical, noiseless signal, considered here with respect to TiRe-LII signals. For simplicity, a sample set of data was included with this distribution for reference. It can be loaded using:
 
 ```Matlab
-data = csvread('data_lii.csv');
+data = csvread('data/lii.csv');
 t = data(:, 1); % time
 J = data(:, 2); % incandescence
 ```
@@ -31,7 +31,7 @@ The parameters are generally described in [Sipkens et al. (2017)][1]. Briefly, `
 ```Matlab
 N_shots = 500; % number of shots to simulate
 [s_bar, ~, out] = J .* the; % expected mean signal
-s = add_noise(s_bar, tau, the, gam, N_shots);
+[s, ~, out] = add_noise(s_bar, tau, the, gam, N_shots);
     % generate observed signals, with error
 ```
 
@@ -79,7 +79,7 @@ The degree to which the data prescribes to his simple quadratic structure can be
 
 ```Matlab
 figure(2); % plot average of observed signals verses variance and fits
-plot(out.s_ave, out.s_std.^2, '.'); % plot observed average verses variance
+plot(s_ave, s_std.^2, '.'); % plot observed average verses variance
 hold on;
 max_plot = the * max(J); % maximum of x-axis in plots
 
@@ -100,13 +100,11 @@ The code will display the source error model parameters chosen to generate the d
 
 Error model parameters can be modified by editing the assignment of tau, theta, and gamma in the `main.m` script.
 
-----------------
+### Data files
 
-### Components
+Included data files correspond to: 
 
-Included data files are: 
-
-*lii.csv* - Data for a sample expected mean TiRe-LII signal generated for C-N2 using the Michelsen model from [Michelsen et al. (2007)][mich].
+*lii.csv* - Data for a sample expected mean TiRe-LII signal generated for C-N<sub>2</sub> using the Michelsen model from [Michelsen et al. (2007)][mich].
 
 *gaus.csv* - Data corresponding to a Gaussian distribution (used by default in the web app).
 
