@@ -8,11 +8,11 @@ body {
 /*  For navigation */
 .nav {
   display: flex;
-  background-color: #FAFAFA;
+  background-color: #0E1C36;
   list-style: none;
   margin: 0px;
   padding: 0px;
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 3px solid #FFFFFF;
   position: fixed;
   width: 100%;
   font-size: 10pt;
@@ -28,12 +28,12 @@ body {
 }
 
 .nav li a {
-  color: #666666;
+  color: #DDDDDD;
   text-decoration: none;
 }
 
 .nav li a:hover {
-  color: #444444;
+  color: #CCCCCC;
 }
 
 /* For main components */
