@@ -9,7 +9,7 @@ is demonstrated below. The Javascript code was used to build a web app, availabl
 immediately below.
 
 <p align="left">
-  <img width="387" height="337.5" src="docs/web_preview.png">
+  <img width="580.5" height="506.25" src="docs/web_preview.png">
 </p>
 
 ### Demonstrating the Matlab code
