@@ -21,10 +21,11 @@
     <div id="navbar">
       <ul class="nav">
         <li><a href="https://doi.org/10.1364/AO.56.008436">
-            <b style="font-family:Montserrat;font-size:11pt;">GENERAL ERROR MODEL</b>
-            for optical signals
+            <b style="font-family:Montserrat;font-size:11pt;">A GENERAL ERROR MODEL</b>
+            <br><span style="font-size:9pt;">for optical signals</span>
           </a></li>
-        <li><a href="https://github.com/tsipkens">Created by Timothy Sipkens</a></li>
+        <li style="padding-top:29px;"><a href="https://github.com/tsipkens">
+          Created by Timothy Sipkens</a></li>
       </ul>
     </div>
   </div>
@@ -33,17 +34,17 @@
 
   <div class="main">
 
-    <h2>General error model</h2>
+    <h2>A general error model for optical signals</h2>
 
     <p align="justify">
       This model generalizes the Poisson-Gaussian error model to allow
       for fluctuations between measured signals, as described
       by <a href="https://doi.org/10.1364/AO.56.008436">Sipkens et al</a>.
-      Originally, the error model was built to describe time-resolved 
-      laser-induced incandescence (TiRe-LII) signals but has applications 
-      that extend beyond this original scope. 
+      Originally, the error model was built to describe time-resolved
+      laser-induced incandescence (TiRe-LII) signals but has applications
+      that extend beyond this original scope.
     </p>
-      
+
     <p align="justify">
       Overall, the model includes contributions from three components, pictured below.
     </p>
@@ -115,16 +116,21 @@
     <hr>
 
     <p align="justify">
-      This web app was created in association with work completed 
+      This web app was created in association with work completed
       at the University of Waterlloo and supports an article in Applied Optics:
     </p>
 
-    <p align="justify" style="padding-bottom:20px">
+    <p align="justify" style="padding-left:10px;padding-right:10px;">
       <a href="https://doi.org/10.1364/AO.56.008436">
         Sipkens, T.A., Hadwin, P.J., Grauer, S.J. and Daun, K.J., 2017.
         General error model for analysis of laser-induced incandescence signals.
         <i>Applied optics</i>, 56(30), pp.8436-8445.
       </a>
+    </p>
+
+    <p align="justify" style="padding-bottom:20px">
+      Matlab and Javascript code supporting this data viz is available
+      <a href="https://github.com/tsipkens/wat-lii-error">here</a>.
     </p>
 
     <script src="js/add_noise.js"></script>

@@ -80,7 +80,7 @@ var n1 = -2,
 // set the dimensions and margins of the graph
 var margin = {
     top: 0,
-    right: 50,
+    right: 60,
     bottom: 50,
     left: 60
   },
@@ -135,7 +135,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
     .text("Scaled signal, s/max{s}")
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr('transform', 'translate(' + (40 + width) + ',' + height / 2 + ')rotate(-90)')
+    .attr('transform', 'translate(' + (52 + width) + ',' + height / 2 + ')rotate(-90)')
     .text("Signal, s [counts]")
 
   // Fill in the main plot ---------------------------------------------------//
