@@ -1,0 +1,2 @@
+# Get linguist to ignore JavaScript files (respecting original Matlab designation)
+*.js linguist-vendored
