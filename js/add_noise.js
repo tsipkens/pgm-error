@@ -1,3 +1,4 @@
+
 // create an array with linear spacing
 var linspace = function(a, b, n) {
   if (typeof n === "undefined") n = Math.max(Math.round(b - a) + 1, 1);
@@ -78,13 +79,17 @@ var n1 = -2,
 
 
 // set the dimensions and margins of the graph
+var $container = $('#my_dataviz'),
+    width_pc_a = 0.99 * Math.min($container.width(), 1050),
+    height_pc_a = $container.height()
+
 var margin = {
     top: 0,
     right: 60,
     bottom: 50,
     left: 60
   },
-  width = 700 - margin.left - margin.right,
+  width = width_pc_a - margin.left - margin.right,
   height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
