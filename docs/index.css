@@ -131,10 +131,6 @@ div.main {
   padding-bottom: 50px;
 }
 
-div.control {
-  padding-bottom: 5px;
-}
-
 hr {
   border: none;
   border-top: 1px solid #DDDDDD;
@@ -169,4 +165,67 @@ div.tooltip {
 .Qlabel {
   color: #CCCCCC;
   font-size: 8pt;
+}
+
+.axis {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 10pt;
+  font-weight: 200;
+}
+
+
+
+div.control {
+  padding: 0px 30px 5px 0px;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-bottom: 5px;
+  width: 160px;
+}
+
+.control-label {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #444;
+  font-size: 10pt;
+}
+
+.control-unit {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #BBB;
+  font-size: 10pt;
+}
+
+
+
+/* for blue slider */
+.slider {
+  -webkit-appearance: none;
+  width: 90%;
+  height: 5pt;
+  border-radius: 5px;
+  background: #E3E3E3;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: all .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11pt;
+  height: 11pt;
+  border-radius: 50%;
+  border: 1pt solid white;
+  background: #2AADFF;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 11pt;
+  height: 11pt;
+  border-radius: 50%;
+  background: #2AADFF;
+  cursor: pointer
 }

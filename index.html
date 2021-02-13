@@ -6,7 +6,7 @@
   <title>General error model</title>
 
   <link rel="icon" type="image/png" href="docs/favicon.png">
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Load d3.js -->
@@ -95,21 +95,21 @@
     </p>
 
     <div class="control">
-      <b>Gaussian: </b>
-      <input type="range" name="gamSlider" id="gamSlider" min="1" max="21" value="7" style="height:6px;" onchange="displayval(this.value, gam_vec, 'gamval');"> |
+      <span class="control-label">Gaussian level</span>
+      <input type="range" name="gamSlider" id="gamSlider" min="1" max="21" value="7"  class="slider" onchange="displayval(this.value, gam_vec, 'gamval');"> <br>
       γ = <output id="gamval">-</output>
     </div>
 
     <div class="control">
-      <b>Poisson: </b>
-      <input type="range" name="theSlider" id="theSlider" min="1" max="19" value="7" style="height:6px;" onchange="displayval(this.value, the_vec, 'theval');"> |
-      θ = <output id="theval">-</output> |
-      max{s} = <output id="theval2">-</output> [counts]
+      <span class="control-label">Poisson level</span>
+      <input type="range" name="theSlider" id="theSlider" min="1" max="19" value="7"  class="slider" onchange="displayval(this.value, the_vec, 'theval');"> <br>
+      max{s} = <output id="theval2">-</output> <span class="control-unit">counts</span> <br>
+      θ = <output id="theval">-</output>
     </div>
 
     <div class="control">
-      <b>Shot-to-shot: </b>
-      <input type="range" name="tauSlider" id="tauSlider" min="1" max="21" value="11" style="height:6px;" onchange="displayval(this.value, tau_vec, 'tauval');"> |
+      <span class="control-label">Shot-to-shot variation</span>
+      <input type="range" name="tauSlider" id="tauSlider" min="1" max="21" value="11"  class="slider" onchange="displayval(this.value, tau_vec, 'tauval');"> <br>
       τ = <output id="tauval">-</output>
     </div>
 

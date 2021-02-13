@@ -108,29 +108,33 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
     .range([0, width]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x))
+    .attr("class", "axis");
   svg.append("g")
-    .call(d3.axisTop(x));
+    .call(d3.axisTop(x))
+    .attr("class", "axis");
 
   // Add Y axis
   var y = d3.scaleLinear()
     .domain([-0.30, 1.95])
     .range([height, 0]);
   svg.append("g")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y))
+    .attr("class", "axis") ;
   var yvr = d3.scaleLinear()
     .domain([100 / the * (-0.30), 100 / the * 1.95])
     .range([height, 0]);
   var yAxis2 = svg.append("g")
     .attr("transform", "translate(" + width + ",0)")
     .call(d3.axisRight(yvr))
+    .attr("class", "axis")
 
   //-- Add axis labels --//
   // Add X axis label:
   svg.append("text")
     .attr("text-anchor", "middle")
     .attr('x', width / 2)
-    .attr('y', height + 35)
+    .attr('y', height + 38)
     .text("Time, t");
 
   // Y axis label:
