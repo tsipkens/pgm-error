@@ -59,13 +59,13 @@ h4 {
 }
 
 a {
-  color: #000000;
+  color: #111;
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
 
 a:hover {
-  color: #008EED;
+  color: #78BE99;
 }
 
 /*  For navigation */
@@ -218,7 +218,7 @@ div.control {
   height: 11pt;
   border-radius: 50%;
   border: 1pt solid white;
-  background: #2AADFF;
+  background: #78BE99;
   cursor: pointer;
 }
 
@@ -226,6 +226,6 @@ div.control {
   width: 11pt;
   height: 11pt;
   border-radius: 50%;
-  background: #2AADFF;
+  background: #78BE99;
   cursor: pointer
 }
