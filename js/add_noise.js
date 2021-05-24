@@ -101,6 +101,11 @@ var svg = d3.select("#my_dataviz")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gaus.csv", function(data) {
+  
+  //-- Add background rectangle --//
+  svg.append("rect")
+    .attr("width", width).attr("class", "plot-fill")
+    .attr("height", height);
 
   // Add X axis
   var x = d3.scaleLinear()
