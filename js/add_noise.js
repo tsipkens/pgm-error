@@ -104,7 +104,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0, 2500])
+    .domain([0, 25])
     .range([0, width]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
