@@ -6,7 +6,7 @@ Two version of this code are available:
 
 1. A Matlab version code is available in the upper repository. The Matlab code was developed for use with MATLAB 2016a running on Windows and is demonstrated below. Much of the remainder of this README pertains to this version of the code. 
 
-2. A Javascript version of the code is also available in the `js/` directory. The Javascript also uses d3.js to build a web app that demonstrates the error model, available at https://tsipkens.github.io/wat-lii-error/. 
+2. A Javascript version of the code is also available in the `js/` directory. The Javascript also uses d3.js to build a web app that demonstrates the error model, available at https://tsipkens.github.io/pgs-error/. 
 
 ## Demonstrating the Matlab code
 
