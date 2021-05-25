@@ -47,7 +47,7 @@ h1 {
 }
 
 h2 {
-  font-size: 32pt;
+  font-size: 26pt;
   padding-bottom: 5px;
   font-family: 'Nunito';
   font-weight: 200;
@@ -55,8 +55,9 @@ h2 {
 }
 
 .subtitle {
-  font-size: 17pt;
-  padding-bottom: 50px;
+  font-size: 15pt;
+  line-height: 16pt;
+  padding-bottom: 70px;
   padding-top: 0px;
   text-align: center;
   max-width: 400px;
@@ -71,9 +72,10 @@ h3 {
 }
 
 h4 {
-  font-size: 14pt;
+  font-size: 12pt;
   font-family: 'Nunito', 'Open Sans', Arial, sans-serif;
   font-weight: 300;
+  color: #888;
 }
 
 a {
@@ -83,7 +85,7 @@ a {
 }
 
 a:hover {
-  color: #78BE99;
+  color: #EF5181;
 }
 
 /*  For navigation */
@@ -128,22 +130,46 @@ nav {
 }
 
 .nav-link:hover {
-  color: #78BE99;
+  color: #EF5181;
 }
 
 a.anchor {
   display: block;
   position: relative;
-  top: -60px;
+  top: -75px;
   visibility: hidden;
 }
 
 div.footer {
   background-color: #F3F3F3;
   margin-top: 30px;
-  padding-top: 30px;
+  padding-top: 45px;
   margin-bottom: 0px;
-  padding-bottom: 0px;
+  padding-bottom: 40px;
+  color: #888;
+}
+
+.footer a {
+  color: #888;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.footer a:hover {
+  color: #EF5181;
+}
+
+.footer-section {
+  width: 90%;
+  padding-left: 40px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.footer p {
+  text-align: left;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 
@@ -248,7 +274,7 @@ div.control {
   height: 11pt;
   border-radius: 50%;
   border: 1pt solid white;
-  background: #78BE99;
+  background: #EF5181;
   cursor: pointer;
 }
 
@@ -256,6 +282,6 @@ div.control {
   width: 11pt;
   height: 11pt;
   border-radius: 50%;
-  background: #78BE99;
+  background: #EF5181;
   cursor: pointer
 }

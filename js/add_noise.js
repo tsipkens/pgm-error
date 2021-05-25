@@ -85,9 +85,9 @@ var $container = $('#my_dataviz'),
 
 var margin = {
     top: 0,
-    right: 60,
-    bottom: 50,
-    left: 60
+    right: 75,
+    bottom: 60,
+    left: 70
   },
   width = width_pc_a - margin.left - margin.right,
   height = 500 - margin.top - margin.bottom;
@@ -139,17 +139,17 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/wat-lii-error/master/data/gau
   svg.append("text")
     .attr("text-anchor", "middle")
     .attr('x', width / 2)
-    .attr('y', height + 38)
+    .attr('y', height + 42)
     .text("Time, t");
 
   // Y axis label:
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr('transform', 'translate(-35,' + height / 2 + ')rotate(-90)')
+    .attr('transform', 'translate(-40,' + height / 2 + ')rotate(-90)')
     .text("Scaled signal, s/max{s}")
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr('transform', 'translate(' + (52 + width) + ',' + height / 2 + ')rotate(-90)')
+    .attr('transform', 'translate(' + (60 + width) + ',' + height / 2 + ')rotate(-90)')
     .text("Signal, s [counts]")
 
   // Fill in the main plot ---------------------------------------------------//

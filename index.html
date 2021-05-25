@@ -20,7 +20,7 @@
 <body>
 
   <header id="header" class="header">
-    <a href="https://github.com/tsipkens" class="nav-link" style="padding: 15px 10px 15px 5%;font-size:12pt;font-weight:600;">PGS ERRORS</a>
+    <a href="https://github.com/tsipkens" class="nav-link" style="padding: 15px 10px 15px 5%;font-size:12pt;font-weight:600;"><img src="docs/imgs/pgs_logo.svg" height="30pt"></a>
     <nav>
       <ul class="nav-list">
         <li><a href="https://doi.org/10.1364/AO.56.008436" class="nav-link">Sipkens et al. (2017)</a></li>
@@ -39,7 +39,7 @@
 
   <div class="main">
 
-    <h1>PGS ERRORS</h1>
+    <h1><img src="docs/imgs/pgs_logo.svg" height="80pt" style="padding-top:60px;"></h1>
 
     <div class="subtitle">
       A general error model for count-based signals containing
@@ -91,7 +91,7 @@
         this set of parameters</a>).
     </p>
 
-    <h2 id="hlegend">Visualization</h2>
+    <h2>Visualization</h2>
 
     <p align="justify">
       Yellow is a signal two standard deviations below the average,
@@ -99,6 +99,8 @@
       and red is a signal about the average.
       As a result, changing τ will stretch the bounds.
     </p>
+
+    <a class="anchor" id="hlegend"></a>
 
     <div class="control">
       <span class="control-label">Gaussian level</span>
@@ -129,26 +131,35 @@
 
   <div class="footer">
     <div class="main" style="padding-top:20px;padding-bottom:20px;font-size:10pt;">
+      <div class="footer-section" style="width:40px;">
+        <img src="docs/imgs/pgs_gray.svg" height="20pt" style="padding-top:3px;">
+      </div>
 
-      <h4>EXTRA INFO</h4>
+      <div class="footer-section" style="max-width:350px;">
+        <h4>CITATION</h4>
 
-      <p align="justify">
-        This web app was created in association with work completed
-        at the University of Waterlloo and supports an article in Applied Optics:
-      </p>
+        <p>
+          This web app was created in association with work completed
+          at the University of Waterloo and supports an article in Applied Optics:
+        </p>
+        
+        <p>
+          <a href="https://doi.org/10.1364/AO.56.008436">
+            Sipkens, T.A., Hadwin, P.J., Grauer, S.J. and Daun, K.J., 2017.
+            General error model for analysis of laser-induced incandescence signals.
+            <i>Applied optics</i>, 56(30), pp.8436-8445.
+          </a>
+        </p>
+      </div>
 
-      <p align="justify" style="padding-left:10px;padding-right:10px;">
-        <a href="https://doi.org/10.1364/AO.56.008436">
-          Sipkens, T.A., Hadwin, P.J., Grauer, S.J. and Daun, K.J., 2017.
-          General error model for analysis of laser-induced incandescence signals.
-          <i>Applied optics</i>, 56(30), pp.8436-8445.
-        </a>
-      </p>
+      <div class="footer-section" style="max-width:200px;">
+        <h4>CODE</h4>
 
-      <p align="justify" style="padding-bottom:20px">
-        Matlab and Javascript code supporting this data viz is available
-        <a href="https://github.com/tsipkens/wat-lii-error">here</a>.
-      </p>
+        <p>
+          Matlab and Javascript code supporting this data viz is available
+          <a href="https://github.com/tsipkens/wat-lii-error">here</a>.
+        </p>
+      </div>
     </div>
   </div>
 
