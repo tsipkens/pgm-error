@@ -153,7 +153,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgs-error/master/data/gaus.cs
     .text("Scaled signal, s/max{s}")
   svg.append("text")
     .attr("text-anchor", "middle")
-    .attr('transform', 'translate(' + (60 + width) + ',' + height / 2 + ')rotate(-90)')
+    .attr('transform', 'translate(' + (60 + width) + ',' + height / 2 + ')rotate(90)')
     .text("Signal, s [counts]")
 
   // Fill in the main plot ---------------------------------------------------//
