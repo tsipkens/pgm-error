@@ -163,6 +163,7 @@ div.footer {
 .footer-section {
   width: 90%;
   padding-left: 40px;
+  padding-bottom: 20px;
   display: inline-block;
   vertical-align: top;
 }
@@ -180,7 +181,7 @@ div.main {
   max-width: 900px;
   width: 90%;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
 hr {
@@ -252,7 +253,7 @@ div.tooltip {
 
 
 div.control {
-  padding: 0px 30px 5px 0px;
+  padding: 10px 30px 5px 0px;
   display: inline-block;
   vertical-align: text-top;
   margin-bottom: 5px;
