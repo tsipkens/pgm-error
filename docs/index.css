@@ -162,7 +162,7 @@ div.footer {
 
 .footer-section {
   width: 90%;
-  padding-left: 30px;
+  margin-left: 15px;
   padding-bottom: 20px;
   display: inline-block;
   vertical-align: top;
