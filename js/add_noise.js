@@ -144,7 +144,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgs-error/master/data/gaus.cs
     .attr("text-anchor", "middle")
     .attr('x', width / 2)
     .attr('y', height + 42)
-    .text("Time, t");
+    .text("Independent variable (e.g., time, diameter)");
 
   // Y axis label:
   svg.append("text")
