@@ -65,7 +65,7 @@ h2 {
 }
 
 h3 {
-  font-size: 16pt;
+  font-size: 15pt;
   margin-bottom: 9.5px;
   font-family: 'Nunito';
   font-weight: 200;
@@ -93,7 +93,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(252, 252, 252, 1);
+  background-color: rgba(252, 252, 252, 1);;
   margin: 0px;
   padding: 0px;
   font-size: 11pt;
@@ -125,7 +125,8 @@ nav {
   text-decoration: none;
   color: #333;
   transition: all 0.3s ease 0s;
-  font-weight: 400;
+  font-weight: 300;
+  font-size: 12pt;
   top: -500px;
 }
 
@@ -189,11 +190,30 @@ hr {
   margin-bottom: 35px;
 }
 
-.img-center {
+.img-container {
   display: block;
-  margin: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto 10px auto 10px;
+  text-align: center;
+}
+
+.img-schem {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  margin: 0px;
+  display: inline-block;
+  width: 90%;
+}
+@media screen and (min-width: 630px) {
+  .img-schem {
+    margin: auto 0px auto 0px;
+    width: 50%;
+  }
+}
+@media screen and (min-width: 750px) {
+  .img-schem {
+    margin: auto 0px auto 0px;
+    width: 32%;
+  }
 }
 
 /* Associated with plot elements --> */
