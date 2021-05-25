@@ -69,7 +69,11 @@ var realize_noise = function(s, n) {
   return add_noise(s, tau, the, gam, N_shots, n)
 }
 var J_peak = function(the) {
-  return Math.round(100 / the * 10) / 10;
+  out = Math.round(100 / the * 10) / 10;
+  if (!isFinite(out)) {
+    out = "∞";
+  }
+  return out.toString();
 }
 document.getElementById('theval2').value = J_peak(the);
 
