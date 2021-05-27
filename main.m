@@ -34,10 +34,11 @@ s_bar = J .* the; % expected mean signal
 [tau_l, the_l, gam_l] = get_noisel(s);
 disp('Error model parameters: '); % display results
 disp(' ');
-fprintf('         tau     theta   gamma   \n')
-fprintf('True     %4.3f   %4.3f    %4.3f \n', tau, the, gam)
-fprintf('LSQ      %4.3f   %4.3f    %4.3f \n', tau_e, the_e, gam_e);
-fprintf('LSQ(log) %4.3f   %4.3f    %4.3f \n', tau_l, the_l, gam_l);
+fprintf('         <strong> tau      theta    gamma   </strong>\n')
+fprintf('          -----    -----    -----   \n')
+fprintf('<strong>True</strong>      %4.3f    %4.3f    %4.3f \n', tau, the, gam);
+fprintf('<strong>LSQ(log)</strong>  %4.3f    %4.3f    %4.3f \n', tau_l, the_l, gam_l);
+fprintf('<strong>LSQ</strong>       %4.3f    %4.3f    %4.3f \n', tau_e, the_e, gam_e);
 disp(' ');
 
 
