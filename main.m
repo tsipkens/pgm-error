@@ -1,12 +1,10 @@
 
-% *************************************************************************
-% Main script used to load simualted incandescence, evaluate error model, 
-%  fit error model parameters, and plot results. 
-% *************************************************************************
+% Main script used to load simualted incandescence, evaluate 
+%  the error model, fit error model parameters, and plot results. 
 
 clear;
 close all;
-clc;
+% clc;
 
 
 % Load simulated carbon incandescence trace.
