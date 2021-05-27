@@ -49,7 +49,7 @@
 
     <div class="subtitle">
       A general error model for count-based signals containing
-      <b>P</b>oisson, <b>G</b>aussian, and <b>s</b>hot-to-shot errors.
+      <b>P</b>oisson, <b>G</b>aussian, and <b>m</b>ultiplicative errors.
     </div>
     
     <p align="justify">
@@ -93,7 +93,9 @@
 
     <p align="justify">
       Finally, variations in a multiplier between measured signals
-      or <b>shot-to-shot variations</b> allow individual signals to
+      result in <b>multiplicative errors</b> (called shot-to-shot errors in 
+      <a href="https://doi.org/10.1364/AO.56.008436">Sipkens et al. (2017)</a>) 
+      that allow individual signals to
       appear above or below the overall average. This is convolved
       with Poisson noise, such that signals higher than the average
       will contain more noise (this is visibly apparent for
@@ -126,7 +128,7 @@
     </div>
 
     <div class="control">
-      <span class="control-label">Shot-to-shot variation</span>
+      <span class="control-label">Multiplicative level</span>
       <input type="range" name="tauSlider" id="tauSlider" min="1" max="21" value="11"  class="slider" onchange="displayval(this.value, tau_vec, 'tauval');"> <br>
       τ = <output id="tauval">-</output>
     </div>
