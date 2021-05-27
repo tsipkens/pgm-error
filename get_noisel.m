@@ -9,10 +9,7 @@
 %  and standard deviation of the signals, SIG, and computes the error model
 %  parameters.
 %  
-%  [TAU,THE,GAM,FUN] = tools.get_noisel(...) adds an output for the 
-%  error model curve, FUN.
-%  
-%  ------------------------------------------------------------------------
+%  [TAU,THE,GAM,FUN] = tools.get_noisel(MU,SIG) updates 
 %  
 %  AUTHOR: Timothy Sipkens, 2021-05-27
 
@@ -34,8 +31,14 @@ sig(sig==0) = NaN;
 fun = @(x, s) x(1) .^ 2 .* (s .^ 2) + ...
     x(2) .* s + x(3) .^ 2;
 
-x0 = [0.1, 1, min(sig(sig~=0))];
+xg = min(sig(sig~=0));
+
 opts.Display = 'none';
+xp = fminsearch(@(x) ...
+    nansum((log(sig .^ 2 - xg .^ 2) - ...
+    real(log(x .* s))) .^ 2), 1, opts);
+
+x0 = [0.1, xp, xg];
 x_lsq = fmincon( ...
     @(x) nansum((log(fun(x, s)) - 2 .* log(sig)).^2), ...
     x0, [], [], [], [], [0,0,0], [], [], opts);
