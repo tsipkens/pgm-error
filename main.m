@@ -73,6 +73,8 @@ max_plot = max_plot(2);
 fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
     '-k', [0,max_plot]);
 hold off;
+h = gca;
+h.Legend.String{end} = 'Truth';
 
 
 
@@ -88,5 +90,5 @@ fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
     '-k', [0,max_plot]);
 hold off;
 h = gca;
-h.Legend.String{4} = 'Truth';
+h.Legend.String{end} = 'Truth';
 
