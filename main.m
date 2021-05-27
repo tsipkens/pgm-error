@@ -31,11 +31,13 @@ s_bar = J .* the; % expected mean signal
 
 % Fit error model parameters (and display output)
 [tau_e, the_e, gam_e, x_var] = get_noise(s); % fit quadratic to variance
+[tau_l, the_l, gam_l] = get_noisel(s);
 disp('Error model parameters: '); % display results
 disp(' ');
-fprintf('        tau     theta   gamma   \n')
-fprintf('True    %4.3f   %4.3f    %4.3f \n', tau, the, gam)
-fprintf('LSQ     %4.3f   %4.3f    %4.3f \n', tau_e, the_e, gam_e);
+fprintf('         tau     theta   gamma   \n')
+fprintf('True     %4.3f   %4.3f    %4.3f \n', tau, the, gam)
+fprintf('LSQ      %4.3f   %4.3f    %4.3f \n', tau_e, the_e, gam_e);
+fprintf('LSQ(log) %4.3f   %4.3f    %4.3f \n', tau_l, the_l, gam_l);
 disp(' ');
 
 
@@ -61,26 +63,29 @@ legend('s_{bar}', 's_{ave}', 's_{tilde}', 's');
 
 %== FIG 2: Plot of average signal versus variance ========================%
 figure(2); % plot average of observed signals verses variance and fits
-plot(mean(s,2), std(s,[],2).^2, '.'); % plot observed average verses variance
-hold on;
-max_plot = the * max(J); % maximum of x-axis in plots
-
-% plot quadratic error model fit to variance
-fplot(@(x) gam_e^2 + the_e.*x + (tau_e^2).*(x.^2), ...
-    '--k', [0,max_plot]);
+plot_muvar(s, 0, tau_e, the_e, gam_e);
 
 % plot original model parameters
+hold on;
+max_plot = xlim;
+max_plot = max_plot(2);
 fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
     '-k', [0,max_plot]);
-
-% plot only Poisson-Gaussian component of the error model
-fplot(@(x) gam^2 + the.*x, ...
-    '--k', [0,max_plot]);
 hold off;
 
-xlim([0,max_plot]);
-xlabel('<s> [a.u.]');
-ylabel('var(s) [a.u.]');
-legend('Observed', 'Fit error model', ...
-    'General error model', 'Poisson-Gaussian component', ...
-    'location', 'northwest');
+
+
+%== FIG 3: Plot of average signal versus variance on log-scale ===========%
+figure(3); % plot average of observed signals verses variance and fits
+plot_muvar(s, 1, tau_e, the_e, gam_e);
+
+% plot original model parameters
+hold on;
+max_plot = xlim;
+max_plot = max_plot(2);
+fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
+    '-k', [0,max_plot]);
+hold off;
+h = gca;
+h.Legend.String{4} = 'Truth';
+

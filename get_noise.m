@@ -9,6 +9,9 @@
 %  and standard deviation of the signals, SIG, and computes the error model
 %  parameters.
 %  
+%  [TAU,THE,GAM,X_VAR] = tools.get_noise(...) add output for uncertainties
+%  on error model parameters. 
+%  
 %  AUTHOR: Timothy Sipkens
 
 function [tau, the, gam, x_var] = get_noise(s, sig)
