@@ -66,9 +66,18 @@
     </p>
 
     <div class="img-container">
-      <img src="docs/imgs/pois.svg" alt="Noise types" class="img-schem">
-      <img src="docs/imgs/gaus.svg" alt="Noise types" class="img-schem">
-      <img src="docs/imgs/s2s.svg" alt="Noise types" class="img-schem">
+      <div class="img-div">
+        <div class="img-schem">Poisson</div>
+        <img src="docs/imgs/pois.svg" alt="Noise types" class="img-schem">
+      </div>
+      <div class="img-div">
+        <div class="img-schem">Gaussian</div>
+        <img src="docs/imgs/gaus.svg" alt="Noise types" class="img-schem">
+      </div>
+      <div class="img-div">
+        <div class="img-schem">Multiplicative</div>
+        <img src="docs/imgs/s2s.svg" alt="Noise types" class="img-schem">
+      </div>
     </div>
 
     <p align="justify">
@@ -93,7 +102,7 @@
 
     <p align="justify">
       Finally, variations in a multiplier between measured signals
-      result in <b>multiplicative errors</b> (called shot-to-shot errors in 
+      result in <b>multiplicative errors</b> (called <b>shot-to-shot errors</b> in 
       <a href="https://doi.org/10.1364/AO.56.008436">Sipkens et al. (2017)</a>) 
       that allow individual signals to
       appear above or below the overall average. This is convolved

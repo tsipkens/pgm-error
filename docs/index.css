@@ -197,7 +197,7 @@ hr {
   text-align: center;
 }
 
-.img-schem {
+.img-div {
   padding-top: 16px;
   padding-bottom: 16px;
   margin: 0px;
@@ -205,16 +205,24 @@ hr {
   width: 90%;
 }
 @media screen and (min-width: 630px) {
-  .img-schem {
+  .img-div {
     margin: auto 0px auto 0px;
     width: 50%;
   }
 }
 @media screen and (min-width: 750px) {
-  .img-schem {
+  .img-div {
     margin: auto 0px auto 0px;
     width: 32%;
   }
+}
+
+.img-schem {
+  margin: 0px;
+  width: 100%;
+  display: inline;
+  font-weight: 600;
+  color: #000;
 }
 
 /* Associated with plot elements --> */
