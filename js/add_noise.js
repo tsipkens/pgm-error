@@ -104,7 +104,7 @@ var svg = d3.select("#my_dataviz")
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("https://raw.githubusercontent.com/tsipkens/pgs-error/master/data/gaus.csv", function(data) {
+d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.csv", function(data) {
   
   //-- Add background rectangle --//
   svg.append("rect")
