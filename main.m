@@ -18,7 +18,7 @@ J = data(:, 2); % incandescence
 
 % Define error model parameters
 tau = 0.2; % shot-to-shot variation as a dimensionless std. dev.
-the = 10; % amplification / scaling factor
+the = 1; % amplification / scaling factor
 gam = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
 
 
