@@ -1,1 +1,9 @@
+
+# Folder to ignore
 suppl/
+suppl\
+archive/
+archive\
+
+# Ignore temporary ASV files
+*.asv
