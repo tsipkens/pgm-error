@@ -14,8 +14,6 @@ if isempty(f_log); f_log = 0; end
 % Plot observed average verses variance
 mu = mean(s,2);
 vari = std(s,[],2) .^ 2;
-plot(mu, vari, '.');
-hold on;
 
 max_plot = the * max(mu); % maximum of x-axis in plots
 
@@ -26,12 +24,7 @@ if exist('gam', 'var')
     % Plot only Poisson-Gaussian component of the error model.
     fplot(@(x) gam ^ 2 + the .* x, ...
         '--', [0, max_plot], 'Color', [0.4,0.4,0.4]);
-
-    % Annotate plot.
-    xlim([0,max_plot]);
-    xlabel('<s> [a.u.]');
-    ylabel('var(s) [a.u.]');
-
+    hold on;
 
     % Change to log-scale, if flagged.
     if f_log
@@ -53,20 +46,30 @@ if exist('gam', 'var')
 
     % Plot overall error model fit to variance.
     fplot(@(x) gam ^ 2 + the .* x + (tau ^ 2) .* (x .^ 2), ...
-        '-k', [0, max_plot], 'LineWidth', 0.8);
-    
-    if f_log
-        legend('Observed', 'Fit error model', ...
-            'Poisson', 'Gaussian', 'Multiplicative', ...
-            'Fit Poisson-Gaussian contribution', ...
-            'location', 'northwest');
-    else
-        legend('Observed', 'Fit error model', ...
-            'Fit Poisson-Gaussian contribution', ...
-            'location', 'northwest');
-    end
+        '--k', [0, max_plot], 'LineWidth', 0.8);
 end
 
+plot(mu, vari, '.');
 hold off;
+
+
+% Annotate plot.
+xlim([0,max_plot]);
+xlabel('<s> [a.u.]');
+ylabel('var(s) [a.u.]');
+
+% If model plotted, add legend.
+if exist('gam', 'var')
+    if f_log
+        legend('Fit error model', ...
+            'Poisson', 'Gaussian', 'Multiplicative', ...
+            'Fit Poisson-Gaussian contribution', ...
+            'Observed', 'location', 'northwest');
+    else
+        legend('Fit error model', ...
+            'Fit Poisson-Gaussian contribution', ...
+            'Observed', 'location', 'northwest');
+    end
+end
 
 end
