@@ -219,13 +219,14 @@ hr {
 }
 
 div.box {
-  border-radius: 8px;
+  border-radius: 15px;
   padding: 20px 20px;
   margin-bottom: 30px;
   margin-top: 10px;
-  border: black solid 1px;
   color: black;
   text-align: center;
+  box-shadow: 0px 0px 8px #DDD;
+  border: 1px solid DDD;
 }
 
 div.box h3 {
