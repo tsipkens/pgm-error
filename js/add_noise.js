@@ -1,6 +1,5 @@
-
 // create an array with linear spacing
-var linspace = function(a, b, n) {
+var linspace = function (a, b, n) {
   if (typeof n === "undefined") n = Math.max(Math.round(b - a) + 1, 1);
   if (n < 2) {
     return n === 1 ? [a] : [];
@@ -13,8 +12,20 @@ var linspace = function(a, b, n) {
   return ret;
 };
 
+var logspace2 = function (a, b, n) {
+  d0 = linspace(Math.log(a), Math.log(b), n)
+  var data = [];
+  for (ii in d0) {
+    t0 = {
+      J: Math.exp(d0[ii])
+    }
+    data.push(t0)
+  }
+  return data;
+}
+
 // standard random normal numbers
-var randn = function() {
+var randn = function () {
   var u = 0,
     v = 0;
   while (u === 0) u = Math.random(); //Converting [0,1) to (0,1)
@@ -22,7 +33,7 @@ var randn = function() {
   return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 }
 
-var add_noise = function(s_bar, tau, the, gam, N_shots, n) {
+var add_noise = function (s_bar, tau, the, gam, N_shots, n) {
 
   N_s = 1 // s_bar.length // length of each signal
 
@@ -65,10 +76,10 @@ document.getElementById('tauval').value = tau;
 // print to console
 console.log([tau, gam, the])
 
-var realize_noise = function(s, n) {
+var realize_noise = function (s, n) {
   return add_noise(s, tau, the, gam, N_shots, n)
 }
-var J_peak = function(the) {
+var J_peak = function (the) {
   out = Math.round(100 / the * 10) / 10;
   if (!isFinite(out)) {
     out = "∞";
@@ -82,10 +93,12 @@ var n1 = -2,
   n3 = 2;
 
 
+
+
 // set the dimensions and margins of the graph
 var $container = $('#my_dataviz'),
-    width_pc_a = 0.99 * Math.min($container.width(), 1050),
-    height_pc_a = $container.height()
+  width_pc_a = 0.99 * Math.min($container.width(), 1050),
+  height_pc_a = $container.height()
 
 var margin = {
     top: 0,
@@ -94,7 +107,153 @@ var margin = {
     left: 70
   },
   width = width_pc_a - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+  height = 400 - margin.top - margin.bottom;
+
+
+
+//------------------------------------------------------------------------//
+// add the second plot
+
+// set the dimensions and margins of the graph
+var margin2 = margin;
+margin2.top = 5;
+height2 = 300;
+
+var heightp2 = height2 - margin2.top - margin2.bottom, 
+  widthp2 = width_pc_a - margin2.left - margin2.right;
+
+// append the svg object to the body of the page
+var svg2 = d3.select("#plot2")
+  .append("svg")
+  .attr("width", widthp2 + margin2.left + margin2.right)
+  .attr("height", height2 + margin2.top + margin2.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+//-- Add background rectangle --//
+svg2.append("rect")
+  .attr("width", widthp2).attr("class", "plot-fill")
+  .attr("height", heightp2);
+
+np = 500;
+data2 = logspace2(0.1, np, 150)
+
+// Add X axis
+var xp = d3.scaleLog()
+  .domain([data2[1].J / 100, np / 100])
+  .range([0, widthp2]);
+svg2.append("g")
+  .attr("transform", "translate(0," + heightp2 + ")")
+  .call(d3.axisBottom(xp).ticks(5, ""))
+  .attr("class", "axis");
+svg2.append("g")
+  .call(d3.axisTop(xp))
+  .attr("class", "axis");
+
+// Add Y axis
+var yp = d3.scaleLog()
+  .domain([(gam / the) ** 2 * 0.8 + (0.4 / the) ** 2 * 0.05,
+    1.1 * ((tau * np) ** 2 + the * np + gam ** 2) / (the ** 2)
+  ])
+  .range([heightp2, 0]);
+ypAxis = svg2.append("g")
+  .call(d3.axisLeft(yp))
+  .attr("class", "axis");
+ypAxis2 = svg2.append("g")
+  .attr("transform", "translate(" + widthp2 + ",0)")
+  .call(d3.axisRight(yp))
+  .attr("class", "axis")
+
+//-- Add axis labels --//
+// Add X axis label:
+svg2.append("text")
+  .attr("text-anchor", "middle")
+  .attr('x', widthp2 / 2)
+  .attr('y', heightp2 + 42)
+  .text("Expected signal, E(s) [a.u.]");
+
+// Y axis label:
+svg2.append("text")
+  .attr("text-anchor", "middle")
+  .attr('transform', 'translate(-55,' + heightp2 / 2 + ')rotate(-90)')
+  .text("var(s) [a.u.]²")
+
+svg2.append("path")
+  .attr("clip-path", "url(#clip)")
+  .datum(data2)
+  .attr("fill", "none")
+  .attr("stroke", "#82E8FF")
+  .attr("stroke-width", 1)
+  .attr('stroke-dasharray', '5,3')
+  .attr("id", 'lpt')
+  .attr("d", d3.line()
+    .x(function (d) {
+      return xp([d.J] / 100)
+    })
+    .y(function (d) {
+      return yp((tau * [d.J] / the) ** 2)
+    })
+  )
+
+svg2.append("path")
+  .attr("clip-path", "url(#clip)")
+  .datum(data2)
+  .attr("fill", "none")
+  .attr("stroke", "#FF8291")
+  .attr("stroke-width", 1)
+  .attr('stroke-dasharray', '5,3')
+  .attr("id", 'lpp')
+  .attr("d", d3.line()
+    .x(function (d) {
+      return xp([d.J] / 100)
+    })
+    .y(function (d) {
+      return yp([d.J] / the)
+    })
+  )
+
+svg2.append("path")
+  .attr("clip-path", "url(#clip)")
+  .datum(data2)
+  .attr("fill", "none")
+  .attr("stroke", "#FFE382")
+  .attr("stroke-width", 1)
+  .attr('stroke-dasharray', '5,3')
+  .attr("id", 'lpg')
+  .attr("d", d3.line()
+    .x(function (d) {
+      return xp([d.J] / 100)
+    })
+    .y(function (d) {
+      return yp((gam / the) ** 2)
+    })
+  )
+
+svg2.append("path")
+  .attr("clip-path", "url(#clip)")
+  .datum(data2)
+  .attr("fill", "none")
+  .attr("stroke", "#111111")
+  .attr("stroke-width", 2)
+  .attr("id", 'lp1')
+  .attr("d", d3.line()
+    .x(function (d) {
+      return xp([d.J] / 100)
+    })
+    .y(function (d) {
+      return yp(((tau * [d.J]) ** 2 + the * [d.J] + gam ** 2) / (the ** 2))
+    })
+  )
+
+svg2.append("clipPath")
+  .attr("id", "clip")
+  .append("rect")
+  .attr("width", width)
+  .attr("height", heightp2);
+
+
+
+
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -104,8 +263,8 @@ var svg = d3.select("#my_dataviz")
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.csv", function(data) {
-  
+d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.csv", function (data) {
+
   //-- Add background rectangle --//
   svg.append("rect")
     .attr("width", width).attr("class", "plot-fill")
@@ -129,7 +288,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y))
-    .attr("class", "axis") ;
+    .attr("class", "axis");
   var yvr = d3.scaleLinear()
     .domain([100 / the * (-0.30), 100 / the * 1.95])
     .range([height, 0]);
@@ -163,10 +322,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .attr("stroke", "#E40066")
     .attr("stroke-width", 2)
     .attr("d", d3.line()
-      .x(function(d) {
+      .x(function (d) {
         return x(d.t)
       })
-      .y(function(d) {
+      .y(function (d) {
         return y([d.J] / 100)
       })
     )
@@ -179,10 +338,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .attr('stroke-dasharray', "4 3")
     .attr("id", 'l1')
     .attr("d", d3.line()
-      .x(function(d) {
+      .x(function (d) {
         return x(d.t)
       })
-      .y(function(d) {
+      .y(function (d) {
         return y((1 + tau * n1) * [d.J] / 100)
       })
     )
@@ -195,10 +354,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .attr('stroke-dasharray', "4 3")
     .attr("id", 'l2')
     .attr("d", d3.line()
-      .x(function(d) {
+      .x(function (d) {
         return x(d.t)
       })
-      .y(function(d) {
+      .y(function (d) {
         return y((1 - tau * n1) * [d.J] / 100)
       })
     )
@@ -208,10 +367,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .data(data)
     .enter()
     .append("circle")
-    .attr("cx", function(d) {
+    .attr("cx", function (d) {
       return x(d.t);
     })
-    .attr("cy", function(d) {
+    .attr("cy", function (d) {
       return y(realize_noise([d.J], n1) / 100);
     })
     .attr("r", 2)
@@ -225,10 +384,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .data(data)
     .enter()
     .append("circle")
-    .attr("cx", function(d) {
+    .attr("cx", function (d) {
       return x(d.t);
     })
-    .attr("cy", function(d) {
+    .attr("cy", function (d) {
       return y(realize_noise([d.J], n2) / 100);
     })
     .attr("r", 2)
@@ -242,10 +401,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .data(data)
     .enter()
     .append("circle")
-    .attr("cx", function(d) {
+    .attr("cx", function (d) {
       return x(d.t);
     })
-    .attr("cy", function(d) {
+    .attr("cy", function (d) {
       return y(realize_noise([d.J], n3) / 100);
     })
     .attr("r", 2)
@@ -254,16 +413,17 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .attr("id", 'C')
     .style("fill", '#0E1C36')
 
+
   // slider controls
-  d3.select("#gamSlider").on("change", function() {
+  d3.select("#gamSlider").on("change", function () {
     gam = gam_vec[this.value - 1]
     updatePlot()
   })
-  d3.select("#theSlider").on("change", function() {
+  d3.select("#theSlider").on("change", function () {
     the = the_vec[this.value - 1]
     updatePlot()
   })
-  d3.select("#tauSlider").on("change", function() {
+  d3.select("#tauSlider").on("change", function () {
     tau = tau_vec[this.value - 1]
     updatePlot()
   })
@@ -272,9 +432,11 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
   // a generic plot updater using a given data set
   // e.g., used whenever the slider for da is changed
   function updatePlot() {
-    var realize_noise = function(s, n) {
+    var realize_noise = function (s, n) {
       return add_noise(s, tau, the, gam, N_shots, n)
     }
+
+    the = the + 1e-20;
 
     // give these new data to update plot
     svg.select("#l1")
@@ -282,10 +444,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
       .transition()
       .duration(100)
       .attr("d", d3.line()
-        .x(function(d) {
+        .x(function (d) {
           return x(d.t)
         })
-        .y(function(d) {
+        .y(function (d) {
           return y((1 + tau * n1) * [d.J] / 100)
         })
       );
@@ -295,10 +457,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
       .transition()
       .duration(100)
       .attr("d", d3.line()
-        .x(function(d) {
+        .x(function (d) {
           return x(d.t)
         })
-        .y(function(d) {
+        .y(function (d) {
           return y((1 - tau * n1) * [d.J] / 100)
         })
       );
@@ -307,7 +469,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
       .data(data)
       .transition()
       .duration(100)
-      .attr("cy", function(d) {
+      .attr("cy", function (d) {
         return y(realize_noise([d.J], n1) / 100);
       });
 
@@ -315,7 +477,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
       .data(data)
       .transition()
       .duration(100)
-      .attr("cy", function(d) {
+      .attr("cy", function (d) {
         return y(realize_noise([d.J], n2) / 100);
       });
 
@@ -323,7 +485,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
       .data(data)
       .transition()
       .duration(100)
-      .attr("cy", function(d) {
+      .attr("cy", function (d) {
         return y(realize_noise([d.J], n3) / 100);
       });
 
@@ -332,21 +494,86 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
       .range([height, 0]);
     yAxis2.attr("transform", "translate(" + width + ",0)")
       .call(d3.axisRight(yvr))
+
+
+    var yp = d3.scaleLog()
+      .domain([(gam / the) ** 2 * 0.8 + (0.4 / the) ** 2 * 0.05,
+        1.1 * ((tau * np) ** 2 + the * np + gam ** 2) / (the ** 2)
+      ])
+      .range([heightp2, 0]);
+    ypAxis2.attr("transform", "translate(" + width + ",0)")
+      .call(d3.axisRight(yp));
+    ypAxis.call(d3.axisLeft(yp));
+
+    svg2.select("#lpg")
+      .datum(data2)
+      .transition()
+      .duration(100)
+      .attr("d", d3.line()
+        .x(function (d) {
+          return xp([d.J] / 100)
+        })
+        .y(function (d) {
+          return yp((gam / the) ** 2 + 1e-20)
+        })
+      );
+
+    svg2.select("#lpp")
+      .datum(data2)
+      .transition()
+      .duration(100)
+      .attr("d", d3.line()
+        .x(function (d) {
+          return xp([d.J] / 100)
+        })
+        .y(function (d) {
+          return yp([d.J] / the + 1e-20)
+        })
+      );
+
+    svg2.select("#lpt")
+      .datum(data2)
+      .transition()
+      .duration(100)
+      .attr("d", d3.line()
+        .x(function (d) {
+          return xp([d.J] / 100)
+        })
+        .y(function (d) {
+          return yp((tau * [d.J] / the) ** 2 + 1e-20)
+        })
+      );
+
+    svg2.select("#lp1")
+      .datum(data2)
+      .transition()
+      .duration(100)
+      .attr("d", d3.line()
+        .x(function (d) {
+          return xp([d.J] / 100)
+        })
+        .y(function (d) {
+          return yp(((tau * [d.J]) ** 2 + the * [d.J] + gam ** 2 + 1e-20) / (the ** 2))
+        })
+      );
+
   }
   //------------------------------------------------------------------------//
 
   // setpoint to show Poisson noise variations due to shot-to-shot
-  d3.select("#set2").on("click", function() {
+  d3.select("#set2").on("click", function () {
     setvals(1, 19, 8);
   })
 
-  d3.select("#set1").on("click", function() {
+  d3.select("#set1").on("click", function () {
     setvals(1, 12, 21);
   })
 
   // function to set sliders to specific values
-  function setvals (gamv, thev, tauv) {
-    gam = gam_vec[gamv - 1]; the = the_vec[thev - 1]; tau = tau_vec[tauv - 1];
+  function setvals(gamv, thev, tauv) {
+    gam = gam_vec[gamv - 1];
+    the = the_vec[thev - 1];
+    tau = tau_vec[tauv - 1];
 
     document.getElementById('gamval').value = Math.round(gam * 100) / 100;
     document.getElementById('theval').value = Math.round(the * 100) / 100;
@@ -366,7 +593,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
 })
 
 
-function displayval (val, vec, id) {
+function displayval(val, vec, id) {
   document.getElementById(id).value = Math.round(vec[val - 1] * 100) / 100;
   if (id == "theval") {
     document.getElementById("theval2").value = J_peak(vec[val - 1]);
