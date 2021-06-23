@@ -349,7 +349,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
   svg.append("path")
     .datum(data)
     .attr("fill", "none")
-    .attr("stroke", "#0E1C36")
+    .attr("stroke", "#0D083E")
     .attr("stroke-width", 1.5)
     .attr('stroke-dasharray', "4 3")
     .attr("id", 'l2')
@@ -411,7 +411,7 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     .attr("stroke", "black")
     .attr("stroke-width", 0)
     .attr("id", 'C')
-    .style("fill", '#0E1C36')
+    .style("fill", '#0D083E')
 
 
   // slider controls
