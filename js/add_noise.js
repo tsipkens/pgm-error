@@ -569,6 +569,10 @@ d3.csv("https://raw.githubusercontent.com/tsipkens/pgm-error/master/data/gaus.cs
     setvals(1, 12, 21);
   })
 
+  d3.select("#set3").on("click", function () {
+    setvals(20, 1, 1);
+  })
+
   // function to set sliders to specific values
   function setvals(gamv, thev, tauv) {
     gam = gam_vec[gamv - 1];

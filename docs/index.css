@@ -34,7 +34,6 @@ p {
 
 b {
   font-weight: 600;
-  color: #000;
 }
 
 h1 {
@@ -191,15 +190,9 @@ hr {
   margin-bottom: 35px;
 }
 
-.img-container {
-  display: block;
-  margin: auto 10px auto 10px;
-  text-align: center;
-}
-
 .img-div {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin: 0px;
   display: inline-block;
   width: 90%;
@@ -224,6 +217,27 @@ hr {
   font-weight: 600;
   color: #000;
 }
+
+div.box {
+  border-radius: 8px;
+  padding: 20px 20px;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  border: black solid 1px;
+  color: black;
+  text-align: center;
+}
+
+div.box h3 {
+  font-weight: 800;
+  font-size: 14pt;
+}
+
+div.box a:hover {
+  color: #444;
+}
+
+
 
 /* Associated with plot elements --> */
 /* Plot background color */
