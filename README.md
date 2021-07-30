@@ -6,7 +6,7 @@
 
 This is a software package, originally distributed in association with [Sipkens et al. (2017)][1], which evaluates a general error model for optical signals, including Poisson-Gaussian noise and changes in the measurement conditions between repeated observations (e.g., between measurement repeats, such as across multiple laser shots). Particular focus is placed on time-resolved laser-induced (TiRe-LII) and the shot-to-shot variations in quantities like the laser energy and particle volume fraction in the probe volume. This code replaces an archived version available on [figshare](https://figshare.com/articles/MATLAB_tools_for_a_general_TiRe-LII_error_model/5457253/2). 
 
-Two version of this code are available: 
+Two versions of this code are available: 
 
 1. A Matlab version code is available in the upper repository. The Matlab code was developed for use with MATLAB 2016a running on Windows and is demonstrated below. Much of the remainder of this README pertains to this version of the code. 
 
