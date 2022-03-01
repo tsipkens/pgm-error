@@ -17,19 +17,14 @@ function [tau, the, gam, fun] = get_noisel(s, sig)
 
 % Use covf function with 'pgm' error model.
 if ~exist('sig', 'var')
-    [~, xlsq] = covf(s, 'pgm', 2);
+    [~, tau, the, gam] = covf(s, 'pgm', 2);
 else
-    [~, xlsq] = covf(s, 'pgm', sig);
+    [~, tau, the, gam] = covf(s, 'pgm', sig);
 end
 
 % Quadratic curve used for fitting.
 % See Sipkens et al. for why this works.
 fun = @(x, s) x(1) .^ 2 .* (s .^ 2) + ...
     x(2) .* s + x(3) .^ 2;
-
-% Interpret polynomial coefficients.
-tau = xlsq(1);
-the = xlsq(2);
-gam = xlsq(3);
 
 end
