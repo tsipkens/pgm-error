@@ -13,27 +13,27 @@ close all;
 %  Appl. Phys. B, 2007) at a wavelength of 500 nm. 
 data = csvread('data/lii.csv', 1, 0);
 % data = csvread('data/gaus.csv', 1, 0);  % alt. using Gaussian
-t = data(:, 1); % time
-J = data(:, 2); % incandescence
+t = data(:, 1);  % time
+J = data(:, 2);  % incandescence
 
 
-% Define error model parameters
-tau = 0.2; % shot-to-shot variation as a dimensionless std. dev.
-the = 1; % amplification / scaling factor
-gam = sqrt(2); % Gaussian noise level, in percent of max, i.e. 15 = 15%
+% Define error model parameters.
+tau = 0.2;  % shot-to-shot variation as a dimensionless std. dev.
+the = 1;  % amplification / scaling factor
+gam = sqrt(2);  % Gaussian noise level, in percent of max, i.e. 15 = 15%
 
 
-% Generate a set of signals with error
-N_shots = 500; % number of shots to simulate
-s_bar = J .* the; % expected mean signal
+% Generate a set of signals with error.
+N_shots = 500;  % number of shots to simulate
+s_bar = J .* the;  % expected mean signal
 [s, ~, G, out] = add_noise(s_bar, tau, the, gam, N_shots);
     % generate observed signals, with error
     
 
-% Fit error model parameters (and display output)
-[tau_e, the_e, gam_e, x_var] = get_noise(s); % fit quadratic to variance
+% Fit the error model parameters (and display output).
+[tau_e, the_e, gam_e, x_var] = get_noise(s);  % fit quadratic to variance
 [tau_l, the_l, gam_l] = get_noisel(s);
-disp('Error model parameters: '); % display results
+disp('Error model parameters: ');  % display results
 disp(' ');
 fprintf('         <strong> tau      theta    gamma   </strong>\n')
 fprintf('          -----    -----    -----   \n')
@@ -67,7 +67,7 @@ legend('s_{bar}', 's_{ave}', 's_{tilde}', 's');
 figure(2); % plot average of observed signals verses variance and fits
 plot_muvar(s, 0, tau_e, the_e, gam_e);
 
-% plot original model parameters
+% Plot the original model parameters.
 hold on;
 max_plot = xlim;
 max_plot = max_plot(2);
@@ -83,10 +83,10 @@ h.Legend.String{end} = 'Truth';
 
 
 %== FIG 3: Plot of average signal versus variance on log-scale ===========%
-figure(3); % plot average of observed signals verses variance and fits
+figure(3);  % plot average of observed signals verses variance and fits
 plot_muvar(s, 1, tau_e, the_e, gam_e);
 
-% plot original model parameters
+% Plot the original model parameters.
 hold on;
 max_plot = xlim;
 max_plot = max_plot(2);
