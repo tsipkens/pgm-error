@@ -1,15 +1,15 @@
 
-% COVF  Estimate covariance matrix by fitting an error model.
+% COVP  Estimate covariance matrix by fitting an error model.
 %   
 %   This is intended to be a drop-in replacement for default cov().
 %   
-%   COVF(X) For matrices, where each row of X is an observation, 
-%   and each column a variable, COVF(X) is the covariance matrix.  
-%   DIAG(COVF(X)) is a vector of variances for each column, 
-%   and SQRT(DIAG(COVF(X))) is a vector of standard deviations. 
+%   COVP(X) For matrices, where each row of X is an observation, 
+%   and each column a variable, COVP(X) is the covariance matrix.  
+%   DIAG(COVP(X)) is a vector of variances for each column, 
+%   and SQRT(DIAG(COVP(X))) is a vector of standard deviations. 
 %   By default, fitting assumes Poisson noise.
 %   
-%   COVF(X,MODEL) adds a string containing model information. 
+%   COVP(X,MODEL) adds a string containing model information. 
 %   Options include:
 %    'p'        Poisson noise model
 %    'pg'       Poisson-Gaussian error model
@@ -17,18 +17,18 @@
 %    'pgm-c'    PGM error model with correlated multiplicative errors
 %    '*-ed'     Add exponential distance covariance information
 %   
-%   COVF(X,MODEL,DIM) adds a dimension argument. Default is DIM = 1. 
+%   COVP(X,MODEL,DIM) adds a dimension argument. Default is DIM = 1. 
 %   DIM = 2 transposes the data, corresponding to where each row is a 
 %   variable.
 %   
-%   COVF(X,MODEL,STD) uses the standard deviations in STD in the place of
+%   COVP(X,MODEL,STD) uses the standard deviations in STD in the place of
 %   computing a standard deviation from X. Both STD and X should be vectors
 %   of the same length.
 %  
-%   COVF(...,F_PLOT) adds a flag for whether or not to show a diagnostic 
+%   COVP(...,F_PLOT) adds a flag for whether or not to show a diagnostic 
 %   plot, which shows the adequacy of the fitting procedure. 
 %  
-%   [C, TAU, THE, GAM] = COVF(...) adds specific outputs for each of the
+%   [C, TAU, THE, GAM] = COVP(...) adds specific outputs for each of the
 %   error model parameters, instead of a vector. This is more consistent
 %   with earlier formats of this code. 
 %   
@@ -36,7 +36,7 @@
 %  
 %   AUTHOR: Timothy Sipkens, 2022-02-08
 
-function [c, xlsq, the, gam] = covf(x, model, dim, f_plot)
+function [c, xlsq, the, gam] = covp(x, model, dim, f_plot)
 
 %-- Handle inputs --------------------------------------------------------%
 % Type of error model.

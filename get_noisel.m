@@ -17,9 +17,9 @@ function [tau, the, gam, fun] = get_noisel(s, sig)
 
 % Use covf function with 'pgm' error model.
 if ~exist('sig', 'var')
-    [~, tau, the, gam] = covf(s, 'pgm', 2);
+    [~, tau, the, gam] = covp(s, 'pgm', 2);
 else
-    [~, tau, the, gam] = covf(s, 'pgm', sig);
+    [~, tau, the, gam] = covp(s, 'pgm', sig);
 end
 
 % Quadratic curve used for fitting.

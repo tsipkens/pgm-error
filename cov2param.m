@@ -9,7 +9,7 @@ function [tau, the, gam] = cov2param(G, s)
 
 sig = sqrt(diag(G));  % extract standard deviation
 
-[tau, the, gam] = get_noisel(s, sig);  % get noise parameters
+[~, tau, the, gam] = covp(s, 'pgm', sig);  % get noise parameters
 
 end
 
