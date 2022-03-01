@@ -15,22 +15,26 @@
 %    'pgm-c'    PGM error model with correlated multiplicative errors
 %    '*-ed'     Add exponential distance covariance information
 %   
-%   COVF(X,MODEL,STD) uses the standard deviations in STD in the place of
-%   computing a standard deviation from X. Both STD and X should be vectors
-%   of the same length.
-%   
 %   COVF(X,MODEL,DIM) adds a dimension argument. Default is DIM = 1. 
 %   DIM = 2 transposes the data, corresponding to where each row is a 
 %   variable.
+%   
+%   COVF(X,MODEL,STD) uses the standard deviations in STD in the place of
+%   computing a standard deviation from X. Both STD and X should be vectors
+%   of the same length.
 %  
 %   COVF(...,F_PLOT) adds a flag for whether or not to show a diagnostic 
 %   plot, which shows the adequacy of the fitting procedure. 
+%  
+%   [C, TAU, THE, GAM] = COVF(...) adds specific outputs for each of the
+%   error model parameters, instead of a vector. This is more consistent
+%   with earlier formats of this code. 
 %   
 %   -----------------------------------------------------------------------
 %  
 %   AUTHOR: Timothy Sipkens, 2022-02-08
 
-function [c, xlsq] = covf(x, model, dim, f_plot)
+function [c, xlsq, the, gam] = covf(x, model, dim, f_plot)
 
 %-- Handle inputs --------------------------------------------------------%
 % Type of error model.
@@ -65,20 +69,21 @@ sig(isinf(sig)) = NaN;
 s(s==0) = NaN;  % replace all zero values
 sig(sig==0) = NaN;
 
-% Get minimization function, depending on the error model.
+% Get the minimization function to find error model parameters, 
+% which depends on the error model being implemented.
 % Fitting only occurs for the variance, at this point.
 switch model
-    case {'p', 'p-ed'}
+    case {'p', 'p-ed'}  % only POISSON modes
         x0 = 1;
-        fun = @(x, s) x .* s;
-        min_fun = @(x) log(fun(x, s)) - log(sig .^ 2);
+        fun = @(x, s) x .* s;  % function for the variance
+        min_fun = @(x) log(fun(x, s)) - log(sig .^ 2);  % func. to find parameters
 
-    case {'pg', 'pg-ed'}
+    case {'pg', 'pg-ed'}  % POISSON-GAUSSIAN noise
         x0 = [1, min(sig(sig~=0))];
-        fun = @(x, s) x(1) .* s + x(2) .^ 2;
+        fun = @(x, s) x(1) .* s + x(2) .^ 2;  % function for the variance
         min_fun = @(x) log(fun(x, s)) - log(sig .^ 2);
         
-    case {'pgm-c', 'pgm', 'pgm-ed'}
+    case {'pgm-c', 'pgm', 'pgm-ed'}  % full PGM error model
         % Fit a quadratic curve.
         % See Sipkens et al. for why this works.
         xg = min(sig(sig~=0));
@@ -88,21 +93,25 @@ switch model
         
         x0 = [0.1, xp, xg];
         fun = @(x, s) x(1) .^ 2 .* (s .^ 2) + ...
-            x(2) .* s + x(3) .^ 2;
+            x(2) .* s + x(3) .^ 2;  % function for the variance
+        
+        % Fit in log space (more robust than polyfit for most data).
         min_fun = @(x) log(fun(x, s)) - log(sig .^ 2);
     otherwise
         error('Invalid error model.');
 end
 
-% Get error model parameters.
+% Get error model parameters using a constrained minimization
+% (enforcing non-negativity). Uses min_fun from above.
 z = zeros(size(x0));
 xlsq = fmincon( ...
     @(x) norm(min_fun(x)), ...
     x0, [], [], [], [], z, [], [], opts);
 
-% Build variance matrix.
+% Build variance matrix using error model parameters.
 c = fun(xlsq, s);
 c = diag(c);
+
 
 %== ADDING CORRELATION ===================================================%
 %   For correlated errors, add off-diagonals depending on form.
@@ -127,6 +136,7 @@ elseif contains(model, '-ed')  % for exponential distrance correlation
 end
 %=========================================================================%
 
+
 % Diagnostic plot.
 % Show accuracy of fitting procedure.
 if f_plot
@@ -136,6 +146,17 @@ if f_plot
     plot(vec, fun(xlsq, vec), 'k--')
     hold off;
     set(gca, 'XScale', 'log', 'YScale', 'log');
+end
+
+% Modify output if individual parameters are to be returned.
+if nargout > 2
+    if length(xlsq) > 1; the = xlsq(2);
+    else; the = []; end
+    
+    if length(xlsq) > 2; gam = xlsq(3);
+    else; gam = []; end
+    
+    xlsq = xlsq(1);
 end
 
 end
