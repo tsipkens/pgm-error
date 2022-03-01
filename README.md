@@ -92,8 +92,11 @@ hold on;
 max_plot = the * max(J); % maximum of x-axis in plots
 
 % plot quadratic error model fit to variance
-fplot(@(x) tau_e^2 + the_e.*x + gam_e.*(x.^2), ...
-    '--k', [0,max_plot]);
+fplot(@(x) ...
+    gam ^ 2 + ...  % Gaussian
+    the .* x + ...  % Poisson
+    (tau ^ 2) .* (x.^2), ...  % multiplicative
+    '-k', [0,max_plot]);
 
 hold off;
 ```
