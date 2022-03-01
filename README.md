@@ -80,7 +80,7 @@ s_std = std(s, [], 2);
 Alternatively, these quantities are output directly from the `add_noise()` function, as shown above. Now, fit a quadratic polynomial to the data using `get_noise()`:
 
 ```Matlab
-[tau_e, the_e, gam_e, x_var] = get_noise(s);
+[tau_e, the_e, gam_e, x_std] = get_noise(s);
 ```
 
 The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data:
@@ -112,7 +112,7 @@ Error model parameters can be modified by editing the assignment of tau, theta, 
 
 Included data files correspond to:
 
-*lii.csv* - Data for a sample expected mean TiRe-LII signal generated for C-N<sub>2</sub> using the Michelsen model from [Michelsen et al. (2007)][mich].
+*lii.csv* - Data for a sample expected mean TiRe-LII signal generated for C-N<sub>2</sub> using the Michelsen model from [Michelsen et al. (2007)][2].
 
 *gaus.csv* - Data corresponding to a Gaussian distribution (used by default in the web app).
 
