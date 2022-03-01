@@ -19,7 +19,7 @@ function [tau, the, gam, fun] = get_noisel(s, sig)
 if ~exist('sig', 'var')
     [~, xlsq] = covf(s, 'pgm', 2);
 else
-    [~, xlsq] = covf(s, sig);
+    [~, xlsq] = covf(s, 'pgm', sig);
 end
 
 % Quadratic curve used for fitting.

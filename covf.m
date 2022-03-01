@@ -15,8 +15,9 @@
 %    'pgm-c'    PGM error model with correlated multiplicative errors
 %    '*-ed'     Add exponential distance covariance information
 %   
-%   COVF(X,STD) uses the standard deviation STD and assumes the 
-%   PGM error model. 
+%   COVF(X,MODEL,STD) uses the standard deviations in STD in the place of
+%   computing a standard deviation from X. Both STD and X should be vectors
+%   of the same length.
 %   
 %   COVF(X,MODEL,DIM) adds a dimension argument. Default is DIM = 1. 
 %   DIM = 2 transposes the data, corresponding to where each row is a 
@@ -35,12 +36,9 @@ function [c, xlsq] = covf(x, model, dim, f_plot)
 % Type of error model.
 if ~exist('model', 'var'); model = []; end
 if isempty(model); model = 'pgm'; end
-if isnumeric(model)  % actually a std. dev.
-    t = model;
-    model = 'pgm';
-end
 
 % Dimenion over which to consider covariance.
+% Alt. is that std. dev. are provided.
 if ~exist('dim', 'var'); dim = []; end
 if isempty(dim); dim = 1; end
 if dim == 2; x = x'; end
@@ -53,10 +51,10 @@ opts.Display = 'none';
 %-------------------------------------------------------------------------%
 
 % Get mean and standard deviation.
-if exist('t', 'var')  % if model is std. devs.
+if length(dim) == length(x)  % if dim is actually a std. dev.
     s = x;
-    sig = t;
-else
+    sig = dim;
+else  % otherwise, compute mean and std. dev.
     s = mean(x);
     sig = std(x);
 end
