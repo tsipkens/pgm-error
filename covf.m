@@ -1,6 +1,8 @@
 
 % COVF  Estimate covariance matrix by fitting an error model.
-%  
+%   
+%   This is intended to be a drop-in replacement for default cov().
+%   
 %   COVF(X) For matrices, where each row of X is an observation, 
 %   and each column a variable, COVF(X) is the covariance matrix.  
 %   DIAG(COVF(X)) is a vector of variances for each column, 
