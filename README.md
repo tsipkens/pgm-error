@@ -38,8 +38,8 @@ The parameters are generally described in [Sipkens et al. (2017)][1]. Briefly, `
 
 ```Matlab
 N_shots = 500; % number of shots to simulate
-[s_bar, ~, out] = J .* the; % expected mean signal
-[s, ~, out] = add_noise(s_bar, tau, the, gam, N_shots);
+s_bar = J .* the; % expected mean signal
+[s, ~, ~, out] = add_noise(s_bar, tau, the, gam, N_shots);
     % generate observed signals, with error
 ```
 
