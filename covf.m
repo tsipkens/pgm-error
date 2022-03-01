@@ -34,7 +34,7 @@ function [c, xlsq] = covf(x, model, dim, f_plot)
 %-- Handle inputs --------------------------------------------------------%
 % Type of error model.
 if ~exist('model', 'var'); model = []; end
-if isempty(model); model = 'p'; end
+if isempty(model); model = 'pgm'; end
 if isnumeric(model)  % actually a std. dev.
     t = model;
     model = 'pgm';
