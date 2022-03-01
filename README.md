@@ -77,13 +77,13 @@ s_ave = mean(s, 2);
 s_std = std(s, [], 2);
 ```
 
-Alternatively, these quantities are output directly from the `add_noise()` function, as shown above. Now, fit a quadratic polynomial to the data using `get_noise()`:
+Alternatively, these quantities are output directly from the `add_noise()` function, as shown above. Now, fit a quadratic polynomial. It is recommended that one fit to the data in log-space, using `get_noisel()`:
 
 ```Matlab
-[tau_e, the_e, gam_e, x_std] = get_noise(s);
+[tau_l, the_l, gam_l] = get_noisel(s);
 ```
 
-The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data:
+standard polynomial fitting is available via `get_noise()`. The degree to which the data prescribes to his simple quadratic structure can be demonstrated by plotting the quadratic fit and the data:
 
 ```Matlab
 figure(2); % plot average of observed signals verses variance and fits
@@ -93,9 +93,9 @@ max_plot = the * max(J); % maximum of x-axis in plots
 
 % plot quadratic error model fit to variance
 fplot(@(x) ...
-    gam ^ 2 + ...  % Gaussian
-    the .* x + ...  % Poisson
-    (tau ^ 2) .* (x.^2), ...  % multiplicative
+    gam_l ^ 2 + ...  % Gaussian
+    the_l .* x + ...  % Poisson
+    (tau_l ^ 2) .* (x.^2), ...  % multiplicative
     '-k', [0,max_plot]);
 
 hold off;
