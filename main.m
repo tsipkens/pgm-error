@@ -71,7 +71,10 @@ plot_muvar(s, 0, tau_e, the_e, gam_e);
 hold on;
 max_plot = xlim;
 max_plot = max_plot(2);
-fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
+fplot(@(x) ...
+    gam ^ 2 + ...  % Gaussian
+    the .* x + ...  % Poisson
+    (tau ^ 2) .* (x.^2), ...  % multiplicative
     '-k', [0,max_plot]);
 hold off;
 h = gca;
@@ -92,4 +95,11 @@ fplot(@(x) gam^2 + the.*x + (tau^2).*(x.^2), ...
 hold off;
 h = gca;
 h.Legend.String{end} = 'Truth';
+
+
+
+%== FIG 4: Plot resultant covariance matrix ==============================%
+figure(4);
+imagesc(G);
+
 
